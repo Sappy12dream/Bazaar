@@ -2,13 +2,25 @@
   "name": "bazaar",
   "version": "1.0.0",
   "description": "Project",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
+    "start": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sapna Singh Khatik",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.3",
+    "nodemailer": "^6.7.2",
+    "validator": "^13.7.0"
   }
 }
