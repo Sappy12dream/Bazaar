@@ -24,7 +24,7 @@ const artistSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true, 'Please enter name'],
-        minlength:[8, 'Name should have atleat 8 character' ],
+        validate: [validator.isStrongPassword, 'Password must contain { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1}'],
         select:false
     },
     bio:{
@@ -43,6 +43,11 @@ const artistSchema = new mongoose.Schema({
             type:String,
             required:[true,'url']
         }
+    },
+    whatsappLink:{
+        type:String,
+        required:[true, "Whatsapp link is required"],
+        validate: [validator.isURL, "Please enter a  valid whatsapp link"]
     },
     role:{
         type:String,

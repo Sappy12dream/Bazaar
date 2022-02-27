@@ -6,9 +6,9 @@ const crypto = require('crypto');
 const sendEmail = require("../utils/sendEmail");
 
 exports.createArtist=AsyncErrorHandler(async(req, res, next)=>{
-    const{name, email, password, bio} = req.body
+    const{name, email, password, bio, whatsappLink} = req.body
 
-    const artist = await Artist.create({name, email, password,bio,avatar:{
+    const artist = await Artist.create({name, email, password,bio,whatsappLink,avatar:{
         pid:'pid',
         url:'url'
     }})
@@ -143,7 +143,8 @@ exports.updateArtistDetails = AsyncErrorHandler(async(req,res,next)=>{
     const newUserData = {
         name: req.body.name,
         email:req.body.email,
-        bio:req.body.bio
+        bio:req.body.bio,
+        whatsappLink:req.body.whatsappLink
     }
     const artist = await Artist.findByIdAndUpdate(req.user.id, newUserData)
 

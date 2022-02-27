@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
         required:[true,'Product price can not be empty'],
         maxLength:[8, "Product price can't exceed 8 figure"]
     },
-    rating:{
+    ratings:{
         type:Number,
         default:0
     },
@@ -38,6 +38,12 @@ const productSchema = new mongoose.Schema({
         default:0,
     },
     reviews:[{
+        user:
+         {
+        type:mongoose.Schema.ObjectId,
+        ref:"artist" || "user",
+        required:true
+        },
         name:{
             type:String,
             required:true
