@@ -1,24 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    list-style: none;
-    text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  text-decoration: none;
 }
 
-$dark_black:#050505;
-$black:#171917;
-$light_black:#1e1e1e;	
-$dar_grey_:#383838;
-$grey:#6a6767;
+$dark_black: #050505;
+$black: #171917;
+$light_black: #1e1e1e;
+$dar_grey_: #383838;
+$grey: #6a6767;
 
-.App{
-    width: 100vw;
-    height: 100vh;
-    background-color: $black;
-    color: white;
-
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: $black;
+  color: white;
 }
