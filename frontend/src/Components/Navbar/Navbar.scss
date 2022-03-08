@@ -1,0 +1,31 @@
+.Navbar{
+    padding: 10px;
+    .logo{
+        display: flex;
+        font-size: 24px;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        h1{
+            margin-left: 10px;
+        }
+    }
+    .menu{
+        display: flex;
+        flex-direction: column;
+        a{
+            display: flex;
+            align-items: center;
+            line-height: 14px;
+            color: var(--text-color);
+            padding-bottom: 10px;
+            font-size: 14px;
+            span{
+                margin-left: 10px;
+            }
+            &:active{
+                background-color: blueviolet;
+            }
+        }
+    }
+}

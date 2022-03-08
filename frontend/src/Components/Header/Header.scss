@@ -1,0 +1,27 @@
+.Header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .Search_tab{
+        width: 30%;
+        padding: 10px;
+        background-color: grey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        input{
+            width: 100%;
+            outline: none;
+            border: none;
+            background: grey;
+            padding-left: 10px;
+            
+        }
+    }
+}
+::placeholder{
+    color: var(--text-color);
+
+    }

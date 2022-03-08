@@ -1,8 +1,13 @@
 import './Global/Styles.scss'
+import Navbar from './Components/Navbar/Navbar';
+import Home from './Components/Home/Home';
 function App() {
+  
+  
   return (
-    <div className="App">
-     let's start front end
+    <div className="App" >
+     <Navbar/>
+     <Home/>
     </div>
   );
 }
