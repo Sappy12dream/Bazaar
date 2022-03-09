@@ -1,0 +1,26 @@
+.Product_screen{
+    border-radius: 5px;
+    padding: 20px;
+
+    .page{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        font-size: 12px;
+        .page_fun{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span{
+                margin: 0 10px;
+            }
+        }
+    }
+    .products-wrapper{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}

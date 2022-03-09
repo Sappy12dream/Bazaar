@@ -1,0 +1,49 @@
+.Sub_header{
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    .options{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .option{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: gray;
+            border-radius: 5px;
+            position: relative;
+            p{
+                margin-right: 10px;
+            }
+        }
+        
+    }
+    .add_btn{
+        button{
+            font-size: 12px;
+            background-color: plum;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            outline: none;
+            color: var(--text-color);
+            border: none;
+            line-height: 20px;
+            span{
+                margin-right: 5px;
+                font-size: 20px;
+                font-weight: 900;
+            }
+        }
+    }
+
+}

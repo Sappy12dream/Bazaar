@@ -1,0 +1,8 @@
+        <div className='option'>
+          <p>Category</p>
+          <IoIosArrowDown/>
+        </div>
+        <div className='option'>
+          <p>Pricing</p>
+          <IoIosArrowDown/>
+        </div>
