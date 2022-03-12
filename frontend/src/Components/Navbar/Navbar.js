@@ -21,7 +21,7 @@ function Navbar() {
         <h1>Bazaar</h1>
       </div>
       <div className="menu"> 
-        <Link to="/">
+        <Link to="/products">
           <FaHome />
           <span>Home</span>
         </Link>

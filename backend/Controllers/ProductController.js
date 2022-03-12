@@ -4,8 +4,8 @@ const ApiFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../Utils/errorHandler");
 
 //get all products - user
-exports.getAllProducts = AsyncErrorHandler(async (req, res) => {
-  const resultPerPage = 10;
+exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
+  const resultPerPage = 8;
   const productCount = await Product.countDocuments();
   const apiFeatures = new ApiFeatures(Product.find({}), req.query)
     .search()
