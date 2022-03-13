@@ -3,6 +3,7 @@ import { ImWhatsapp } from "react-icons/im";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import ReactStars from 'react-rating-stars-component'
+
 function Product({product}) {
   const options ={
     edit:false,
@@ -14,9 +15,11 @@ function Product({product}) {
   }
   console.log(product)
   return (
+    
     <Link to={`/product/${product._id}`}>
     <div className="Product">
       <div className="product_image">
+      
         <img src={product.images[0].url} alt={product.name} />
       </div>
       <div className="product_info">
