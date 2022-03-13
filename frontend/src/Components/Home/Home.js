@@ -12,6 +12,7 @@ const Home = () => {
         <Routes>
         <Route path="/product/:id" element={<ProductDetails/>} />
         <Route path="/" element={<Main/>} />
+        <Route path="/products/:keyword" element={<Main/>} />
       </Routes>
     </div>
   )

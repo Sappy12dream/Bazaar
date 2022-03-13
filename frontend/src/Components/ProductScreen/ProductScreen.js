@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../../Redux/ActionCreater/ProductAction";
+import { clearErrors, getProduct } from "../../Redux/ActionCreater/ProductAction";
 import Product from "../Product/Product";
 import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
-import ProductDetails from "../ProductDetails/ProductDetails";
+import { useParams } from "react-router-dom";
 
 function ProductScreen() {
+  const { keyword } = useParams();
+
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products, productCount, nbHits } = useSelector(
@@ -15,11 +17,15 @@ function ProductScreen() {
   );
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors())
     }
-    dispatch(getProduct());
+    
+    dispatch(getProduct(keyword));
+    
+
     console.log("yes");
-  }, [dispatch, error, alert]);
+  }, [dispatch, error, alert, keyword]);
 
   return (
     <>
@@ -37,7 +43,7 @@ function ProductScreen() {
           <>
             <div className="page">
               <div className="info">
-                <p>Results: 1-10 of 2000</p>
+                <p>Results: 1-{nbHits} of {productCount}</p>
               </div>
               <div className="page_fun">
                 <IoIosArrowBack />

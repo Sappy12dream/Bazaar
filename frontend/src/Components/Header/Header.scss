@@ -11,6 +11,16 @@
         align-items: center;
         justify-content: center;
         border-radius: 5px;
+        .Sbutton{
+            background-color: coral;
+            border-radius: 5px;
+            padding: 5px;
+            color: aliceblue;
+            outline: none;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
         input{
             width: 100%;
             outline: none;
