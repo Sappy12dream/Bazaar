@@ -10,9 +10,15 @@ exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
   const apiFeatures = new ApiFeatures(Product.find({}), req.query)
     .search()
     .filter()
-    .pagination(resultPerPage);
+
+    .pagination(resultPerPage)
+
+
   const products = await apiFeatures.query;
-  res.status(201).json({ nbHits: products.length, productCount, products });
+  
+  res
+    .status(201)
+    .json({ nbHits: products.length, productCount, products, resultPerPage });
 });
 
 //create product - Artist

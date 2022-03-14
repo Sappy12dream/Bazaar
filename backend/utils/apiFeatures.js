@@ -29,7 +29,7 @@ class ApiFeatures {
     // filter for price & rating
 
     let queryStr = JSON.stringify(querCopy);
-    queryStr = queryStr.replace(/\b(gt| gte|lt|lte)\b/g, (key) => `$${key}`);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
     return this;

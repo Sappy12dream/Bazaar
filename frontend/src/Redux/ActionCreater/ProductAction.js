@@ -9,12 +9,15 @@ import {
   CLEAR_ERRORS,
 } from "../ActionTypes/productActionType.js";
 
-export const getProduct = (keyword=' ') => async (dispatch) => {
+export const getProduct = (keyword=' ', CurrentPage=1,price=15000, category,rating=0) => async (dispatch) => {
   try {
     dispatch({
       type: ALL_PRODUCT_REQUEST,
     });
-    let link = `/api/v1/products?keyword=${keyword}`
+    let link = `/api/v1/products?keyword=${keyword}&page=${CurrentPage}&price[lte]=${price}&ratings[gte]=${rating}`
+    if(category){
+      link = link = `/api/v1/products?keyword=${keyword}&page=${CurrentPage}&price[lte]=${price}&category=${category}&ratings[gte]=${rating}`
+    }
     const { data } = await axios.get(link);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
