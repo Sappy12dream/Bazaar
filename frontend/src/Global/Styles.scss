@@ -4,10 +4,10 @@
 @import '../Components/SubHeader/SubHeader.scss';
 @import '../Components/ProductScreen/ProductScreen.scss';
 @import '../Components/Product/Product.scss';
-@import '../Components/DropDown/DropDown.scss';
-@import '../Components/Login/loginForm.scss';
 @import '../Components/ProductDetails/ProductDetails.scss';
 @import '../Components/ProductDetails/Review/Review.scss';
+@import '../Components/User/Login.scss';
+@import '../Components/User/Register.scss';
 
 * {
   margin: 0;
@@ -35,6 +35,7 @@ $grey: #6a6767;
   background-color: var(--background-color);
   color: var(--text-color);
   display: flex;
+  position: relative;
   .Home
   {
     background-color: pink;

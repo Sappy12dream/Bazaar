@@ -3,9 +3,15 @@ const ErrorHandler = require("../Utils/errorHandler");
 const User = require("../Model/UserModel");
 const sendToken = require("../utils/sendToken");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 const sendEmail = require("../utils/sendEmail");
 
 exports.createuser = AsyncErrorHandler(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "useravatars",
+    width: 150,
+    crop: "scale",
+  });
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -13,8 +19,8 @@ exports.createuser = AsyncErrorHandler(async (req, res, next) => {
     email,
     password,
     avatar: {
-      pid: "pid",
-      url: "url",
+      pid: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
 

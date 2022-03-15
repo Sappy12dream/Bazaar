@@ -9,7 +9,6 @@ import Product from "../Product/Product";
 import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
-import Pagination from "react-js-pagination";
 
 function ProductScreen({price, ratings, category}) {
   const [CurrentPage, setCurrentPage] = useState(1);
@@ -18,7 +17,7 @@ function ProductScreen({price, ratings, category}) {
 
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading, error, products, productCount, nbHits, resultPerPage, filterdProductCount } =
+  const { loading, error, products, productCount, nbHits, resultPerPage } =
     useSelector((state) => state.products);
 
   const nextPage = (e) => {

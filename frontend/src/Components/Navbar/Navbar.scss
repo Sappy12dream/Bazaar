@@ -1,5 +1,6 @@
 .Navbar{
     padding: 10px;
+    position: relative;
     .logo{
         display: flex;
         font-size: 20px;
@@ -30,4 +31,27 @@
             }
         }
     }
+}
+
+.logout-btn{
+    position: absolute;
+    bottom: 2%;
+    padding: 10px;
+    left: 2%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    cursor: pointer;
+&:hover{
+    font-weight: 500;
+}
+
+span{
+    margin-left: 10px;
+}
 }

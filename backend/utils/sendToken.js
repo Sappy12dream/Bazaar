@@ -1,5 +1,5 @@
-const sendToken = (artist, statusCode, res) => {
-  const token = artist.getJwtToken();
+const sendToken = (auth, statusCode, res) => {
+  const token = auth.getJwtToken();
 
   const options = {
     expires: new Date(
@@ -10,7 +10,7 @@ const sendToken = (artist, statusCode, res) => {
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
-    artist,
+    auth,
     token,
   });
 };

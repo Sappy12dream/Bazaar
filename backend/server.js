@@ -1,6 +1,6 @@
 const app = require("./App");
 const connectDB = require("./Db/connectDB");
-
+const cloudinary = require("cloudinary");
 process.on("uncaughtException", (err) => {
   console.log(`Error:${err}`);
   console.log("Shuting down the server");
@@ -9,6 +9,12 @@ process.on("uncaughtException", (err) => {
 require("dotenv").config({ path: "./backend/config/.env" });
 
 const Port = process.env.PORT;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 const start = async () => {
   try {
     //connectDB
@@ -22,6 +28,7 @@ const start = async () => {
   }
 };
 start();
+
 
 //unhandled error
 process.on("unhandledRejection", (err) => {

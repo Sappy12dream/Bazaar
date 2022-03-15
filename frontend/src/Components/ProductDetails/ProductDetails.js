@@ -23,7 +23,7 @@ function ProductDetails() {
      dispatch(clearErrors())
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error]);
+  }, [dispatch, id, error,alert]);
   console.log(product);
 
   const style = { color: "white", fontSize: "20px" };

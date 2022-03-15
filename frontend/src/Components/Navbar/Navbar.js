@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaOpencart, FaHome } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
+import {RiLogoutBoxRLine} from 'react-icons/ri'
 function Navbar() {
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -31,6 +32,7 @@ function Navbar() {
         </Link>
       </div>
       <button onClick={() => setDarkTheme(!darkTheme)}>change</button>
+      <button onClick={() => setDarkTheme(!darkTheme)} className='logout-btn'><RiLogoutBoxRLine/><span>logout</span></button>
     </div>
   );
 }
