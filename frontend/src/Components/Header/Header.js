@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
+import {IoCloseSharp} from 'react-icons/io5'
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import UserProfile from "../userProfile/UserProfile";
 
 function Header() {
-  const [auth, setauth] = useState(null);
+  const [Active, setActive] = useState(false)
   const navigate = useNavigate();
 
-  const { isAuthenticated, user } = useSelector(
+ const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
 
-  useEffect(() => {
-    if(isAuthenticated){
-      setauth(user)
-    }
-  }, [isAuthenticated, user])
+console.log()
   const [keyword, setkeyword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,19 +40,25 @@ function Header() {
           search
         </button>
       </form>
-      <div className="user_profile">
-        {auth ? (
+      <div className="user_profile" onClick={()=>setActive(!Active)}>
+        {isAuthenticated ? (
           <>
             <div className="user_pic">
-              <img src={auth.user.avatar.url} alt={auth.user.name}/>
+              <img src={user.user.avatar.url} alt={user.user.name}/>
             </div>
-            <p className="user_name">{auth.user.name}</p>
-            <IoIosArrowDown />
+            <p className="user_name">{user.user.name}</p>
+            {Active?(<IoCloseSharp/>):(<IoIosArrowDown />)}
           </>
         ) : (
-          <Link to='/login'>login</Link>
+          <Link to='/login' className="login-btn">login</Link>
         )}
       </div>
+
+      {
+        isAuthenticated && (
+          <UserProfile user={user.user} Active={Active}/>
+        )
+      }
     </div>
   );
 }

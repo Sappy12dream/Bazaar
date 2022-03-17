@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
+import { ThreeDots } from "react-loader-spinner";
+
 import {
   clearErrors,
   userRegister,
@@ -66,12 +68,23 @@ function Register() {
   }, [dispatch, error, alert, isAuthenticated, navigate]);
 
   return (
-    <div className=" Register Login">
+    <>
+      {loading ? (
+        <div className="loader">
+          <ThreeDots
+            type="Spinner Type"
+            color="crimson"
+            height={80}
+            width={80}
+          />
+        </div>
+      ) :
+   ( <div className=" Register Login">
       <h3>Get Started!</h3>
       <p>Register on Bazaar</p>
       <form>
         <input
-          type="type"
+          type="text"
           placeholder="username"
           name="name"
           onChange={registerDataChange}
@@ -101,7 +114,6 @@ function Register() {
             className="custom-file-input"
           />
         </div>
-        <Link to="/forgot">Forgot password?</Link>
         <input
           type="submit"
           value="Register"
@@ -111,7 +123,9 @@ function Register() {
       </form>
       <Link to="/login">Already registered? login</Link>
     </div>
-  );
-}
+  )}
+  </>
+  )}
+
 
 export default Register;

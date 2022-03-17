@@ -1,5 +1,5 @@
-const sendToken = (auth, statusCode, res) => {
-  const token = auth.getJwtToken();
+const sendToken = (user, statusCode, res) => {
+  const token = user.getJwtToken();
 
   const options = {
     expires: new Date(
@@ -10,7 +10,7 @@ const sendToken = (auth, statusCode, res) => {
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
-    auth,
+    user,
     token,
   });
 };

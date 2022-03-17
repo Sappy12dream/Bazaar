@@ -12,7 +12,6 @@ exports.createArtist = AsyncErrorHandler(async (req, res, next) => {
     name,
     email,
     password,
-    bio,
     whatsappLink,
     avatar: {
       pid: "pid",
@@ -150,7 +149,6 @@ exports.updateArtistDetails = AsyncErrorHandler(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
-    bio: req.body.bio,
     whatsappLink: req.body.whatsappLink,
   };
   const artist = await Artist.findByIdAndUpdate(req.user.id, newUserData);

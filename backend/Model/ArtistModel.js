@@ -21,19 +21,14 @@ const artistSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Please enter name"],
+    required: [true, "Please enter password"],
     validate: [
       validator.isStrongPassword,
       "Password must contain { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1}",
     ],
     select: false,
   },
-  bio: {
-    type: String,
-    required: [true, "Please enter name"],
-    maxlength: [200, "Name cannot exceed 200 character"],
-    minlength: [4, "Name should have atleat 4 character"],
-  },
+  
   avatar: {
     pid: {
       type: String,

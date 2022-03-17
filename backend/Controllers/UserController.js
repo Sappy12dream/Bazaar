@@ -71,11 +71,9 @@ exports.forgotPassword = AsyncErrorHandler(async (req, res, next) => {
   const resetToken = user.getResetpassToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetPassUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/user/password/reset/${resetToken}`;
+  const resetPassUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
-  const message = `YourReset Password Token is \n\n ${resetPassUrl} \n if not requested please ignore`;
+  const message = `Your Reset Password Token is \n\n ${resetPassUrl} \n if not requested please ignore`;
 
   try {
     await sendEmail({
@@ -151,11 +149,28 @@ exports.updateuserPassword = AsyncErrorHandler(async (req, res, next) => {
 });
 
 exports.updateuserDetails = AsyncErrorHandler(async (req, res, next) => {
+
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
-    bio: req.body.bio,
   };
+
+  if (req.body.avatar !=="") {
+    const user = await User.findById(req.user.id);
+    const imgId = user.avatar.pid
+    await cloudinary.v2.uploader.destroy(imgId);
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "useravatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
+      pid: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+    
+  }
   const user = await User.findByIdAndUpdate(req.user.id, newUserData);
 
   res.status(200).json({

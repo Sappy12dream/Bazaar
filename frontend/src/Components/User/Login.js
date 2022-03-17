@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAlert } from "react-alert";
+import { ThreeDots } from "react-loader-spinner";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +37,14 @@ function Login() {
   return (
     <>
       {loading ? (
-        <>"okay"</>
+        <><div className="loader">
+        <ThreeDots
+          type="Spinner Type"
+          color="crimson"
+          height={80}
+          width={80}
+        />
+      </div></>
       ) : (
         <div className="Login">
           <h3>Welcome Back!</h3>
