@@ -1,6 +1,5 @@
-import React from "react";
 import { ImWhatsapp } from "react-icons/im";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import ReactStars from 'react-rating-stars-component'
 
@@ -13,7 +12,8 @@ function Product({product}) {
     isHalf:true,
     size:12
   }
-  console.log(product)
+
+ 
   return (
     
     <Link to={`/product/${product._id}`}>

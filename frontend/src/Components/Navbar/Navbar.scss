@@ -1,6 +1,7 @@
 .Navbar{
     padding: 10px;
     position: relative;
+    position: sticky;
     .logo{
         display: flex;
         font-size: 20px;
@@ -34,8 +35,7 @@
 }
 
 .logout-btn{
-    position: absolute;
-    bottom: 2%;
+    bottom: 0;
     padding: 10px;
     left: 2%;
     font-size: 14px;

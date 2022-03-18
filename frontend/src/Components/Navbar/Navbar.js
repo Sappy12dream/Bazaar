@@ -41,13 +41,13 @@ const dispatch = useDispatch()
         <h1>Bazaar</h1>
       </div>
       <div className="menu"> 
-        <Link to="/products">
+        <Link to="/">
           <FaHome />
           <span>Home</span>
         </Link>
-        <Link to="/">
+        <Link to="/wishlist">
           <MdFavorite />
-          <span>Favorite</span>
+          <span>Wish-List</span>
         </Link>
       </div>
       <button onClick={() => setDarkTheme(!darkTheme)}>change</button>

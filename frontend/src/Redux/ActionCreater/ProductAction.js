@@ -9,6 +9,8 @@ import {
   CLEAR_ERRORS,
 } from "../ActionTypes/productActionType.js";
 
+
+
 export const getProduct = (keyword=' ', CurrentPage=1,price=15000, category,rating=0) => async (dispatch) => {
   try {
     dispatch({

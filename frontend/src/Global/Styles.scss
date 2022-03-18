@@ -9,6 +9,7 @@
 @import '../Components/User/Login.scss';
 @import '../Components/User/Register.scss';
 @import '../Components/userProfile/UserProfile.scss';
+@import '../Components/WishList/WishList.scss';
 
 * {
   margin: 0;
@@ -30,37 +31,37 @@ $dar_grey_: #383838;
 $grey: #6a6767;
 
 .App {
-  overflow: hidden;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  background-color: var(--background-color);
+  background-color: var(--text-color);
   color: var(--text-color);
   display: flex;
   position: relative;
   .Home
   {
-    background-color: pink;
+    background-color: var(--background-color);
     width:86%;
-    height: 100%;
+    height:100%;
     .Header{
       width: 100%;
-      height: 60px;
+      height: 10%;
       background-color: var(--background-color);
     }
     .Main{
-      width: 96%;
-      height: 100%;
-      margin: auto;
-      background-color: pink;
+      width: 100%;
+      height: 90%;
+      background-color: var(--text-color);;
+      padding: 8px;
       .Sub_header{
         width: 100%;
-        height: 60px;
-        margin: 10px 0;
+        height: 9%;
+        margin: 0px 0;
         background-color: var(--background-color);
       }
       .Product_screen{
         width: 100%;
-      height: 100%;
+      height: 89%;
+      margin-top: 5px;
         background-color: var(--background-color);
       }
     }

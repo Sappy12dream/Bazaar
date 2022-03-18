@@ -23,7 +23,7 @@ function Login() {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/wishlist");
     }
   }, [dispatch, error, alert, isAuthenticated, navigate]);
 

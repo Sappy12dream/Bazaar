@@ -9,24 +9,26 @@ import UpdateProfile from '../userProfile/UpdateProfile';
 import ChangePassword from '../ChangePassword/ChangePassword';
 import ForgotPassword from '../User/ForgotPassword';
 import ResetPassword from '../User/ResetPassword';
+import WishList from '../WishList/WishList';
 
 
 const Home = () => {
   return (
     <div className='Home'>
-        <Header/>
-        <Routes>
-        <Route path="/product/:id" element={<ProductDetails/>} />
-        <Route path="/" element={<Main/>} />
-        <Route path="/products/:keyword" element={<Main/>} />
+       <Header/>
+       <Routes>
+       <Route path="/" element={<Main/>} />
+       <Route path="/products/:keyword" element={<Main/>} />
+       <Route path="/product/:id" element={<ProductDetails/>} />
+
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/me/update" element={<UpdateProfile/>} />
       <Route path="/password/change" element={<ChangePassword/>} />
       <Route path="/forgot" element={<ForgotPassword/>} />
+      <Route path="/wishlist" element={<WishList/>} />
       <Route path="/password/reset/:token" element={<ResetPassword/>} />
-
-      </Routes>
+       </Routes>
     </div>
   )
 }

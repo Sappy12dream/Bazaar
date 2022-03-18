@@ -7,4 +7,17 @@
           <IoIosArrowDown/>
         </div>
 
-        
+         <Header/>
+        <Routes>
+        <Route path="/product/:id" element={<ProductDetails/>} />
+        <Route path="/" element={<Main/>} />
+        <Route path="/products/:keyword" element={<Main/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/register" element={<Register/>} />
+      <Route path="/me/update" element={<UpdateProfile/>} />
+      <Route path="/password/change" element={<ChangePassword/>} />
+      <Route path="/forgot" element={<ForgotPassword/>} />
+      <Route path="/wishlist" element={<WishList/>} />
+      <Route path="/password/reset/:token" element={<ResetPassword/>} />
+
+      </Routes>

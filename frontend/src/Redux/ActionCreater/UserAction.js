@@ -22,7 +22,6 @@ import {
   USER_UPDATE_PASSWORD_FAIL,
   USER_RESET_PASSWORD_FAIL,
   USER_RESET_PASSWORD_REQUEST,
-  USER_RESET_PASSWORD_RESET,
   USER_RESET_PASSWORD_SUCCESS,
 
 } from "../ActionTypes/userActionType";
@@ -193,7 +192,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS, payload: data.success });
+    dispatch({ type: USER_RESET_PASSWORD_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({
       type: USER_RESET_PASSWORD_FAIL,

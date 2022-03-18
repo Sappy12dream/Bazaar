@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { productDetailsReducer, productsReducer } from "./Reducers/ProductReducer";
 import { forgotPasswordReducer, updateUserReducer, userReducer } from "./Reducers/UserReducer";
+import { addItemReducer, myWishListReducer } from "./Reducers/WishlistReducer";
 
 const reducer = combineReducers({
     products : productsReducer,
@@ -10,6 +11,8 @@ const reducer = combineReducers({
     user: userReducer,
     profile: updateUserReducer,
     forgotPassword:forgotPasswordReducer,
+    addwishList:addItemReducer,
+    myWishList: myWishListReducer
     
 });
 

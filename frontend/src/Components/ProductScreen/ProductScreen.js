@@ -11,7 +11,7 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 
 function ProductScreen({price, ratings, category}) {
-  const [CurrentPage, setCurrentPage] = useState(1);
+   const [CurrentPage, setCurrentPage] = useState(1);
   const [Disable, setDisable] = useState(false);
   const { keyword } = useParams();
 
@@ -81,7 +81,7 @@ function ProductScreen({price, ratings, category}) {
             </div>
             <div className="products-wrapper">
               {products &&
-                products.map((product) => <Product product={product} />)}
+                products.map((product) => <Product product={product} key={product._id}/>)}
             </div>
           </>
         )}

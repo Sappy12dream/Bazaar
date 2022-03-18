@@ -2,34 +2,61 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { MdOutlineFavorite } from "react-icons/md";
+import { RiHeartAddFill } from "react-icons/ri";
 import Review from "./Review/Review";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getProductDetails } from "../../Redux/ActionCreater/ProductAction";
+import {
+  clearErrors,
+  getProductDetails,
+} from "../../Redux/ActionCreater/ProductAction";
 import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
-
+import { useNavigate } from "react-router-dom";
+import { addItem, clearErrs } from "../../Redux/ActionCreater/WishListAction";
 
 function ProductDetails() {
+  const navigate = useNavigate();
+
   const alert = useAlert();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading, product, error } = useSelector((state) => state.productDetails);
+  const { loading, product, error } = useSelector(
+    (state) => state.productDetails
+  );
+  const { loadng, success, err } = useSelector((state) => state.addwishList);
   useEffect(() => {
     if (error) {
-     alert.error(error);
-     dispatch(clearErrors())
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    if (err) {
+      alert.error(err);
+      dispatch(clearErrs());
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error,alert]);
-  console.log(product);
+  }, [dispatch, id, error, alert, err]);
+
+  
+  const handleSubmit = (e) => {
+    navigate("/login?redirect=wishList");
+    if (product) {
+      let productId = product._id
+      dispatch(addItem(productId));
+      if(success){
+        alert.success("Item added to WishList Successfully!")
+
+      }
+      
+    }
+   
+  };
 
   const style = { color: "white", fontSize: "20px" };
   return (
     <>
-      {loading ? (
+      {loading || loadng ? (
         <div className="loader">
           <ThreeDots
             type="Spinner Type"
@@ -80,11 +107,14 @@ function ProductDetails() {
                   <Link to="/">
                     <IoLogoWhatsapp style={{ color: "green" }} />
                   </Link>
-                  <Link to="/">
-                    <MdOutlineFavorite
-                      style={{ color: "red", marginLeft: 10 }}
-                    />
-                  </Link>
+                  <RiHeartAddFill
+                    onClick={handleSubmit}
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                      color: "red",
+                    }}
+                  />
                 </div>
               </div>
             </div>
