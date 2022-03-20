@@ -5,3 +5,26 @@
 
    }
 }
+
+
+.wishlist-pro{
+    position: relative;
+    .dots{
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        .remove{
+            cursor: pointer;
+            position: absolute;
+            right: 10%;
+            top: 80%;
+            background-color: beige;
+            color: black;
+            padding: 2px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        
+    }
+}

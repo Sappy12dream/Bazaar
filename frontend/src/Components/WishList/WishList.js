@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
-import Product from '../Product/Product';
 import { clearErrs, myWishList } from '../../Redux/ActionCreater/WishListAction';
+import Product from './Product';
 
 function WishList() {
 
@@ -20,6 +20,10 @@ function WishList() {
         dispatch(myWishList());
     
       }, [dispatch, error, alert]);
+
+      const removeWishList = ()=>{
+        console.log("hellooooo")
+      }
   return (
     <>
       <div className="Product_screen wishlist">
@@ -44,7 +48,7 @@ function WishList() {
             </div>
             <div className="products-wrapper">
               {items &&
-                items.map((product) => <Product product={product.product} key={product._id}/>)}
+                items.map((product) => <Product product={product.product} key={product._id} id={product._id} removeWishList = {removeWishList}/>)}
             </div>
           </>
         )}

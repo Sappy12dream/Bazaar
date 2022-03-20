@@ -6,3 +6,7 @@ export const CLEAR_ERRORS ='CLEAR_ERRORS';
 export const MY_WISHLIST_REQUEST = 'MY_WISHLIST_REQUEST';
 export const MY_WISHLIST_FAIL = 'MY_WISHLIST_FAIL';
 export const MY_WISHLIST_SUCCESS = 'MY_WISHLIST_SUCCESS';
+
+export const Delete_WISHLIST_REQUEST = 'Delete_WISHLIST_REQUEST';
+export const Delete_WISHLIST_FAIL = 'Delete_WISHLIST_FAIL';
+export const Delete_WISHLIST_SUCCESS = 'Delete_WISHLIST_SUCCESS';

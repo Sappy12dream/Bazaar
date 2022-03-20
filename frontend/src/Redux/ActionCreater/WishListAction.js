@@ -3,6 +3,9 @@ import {
     ADD_TO_WISHLIST_REQUEST,
     ADD_TO_WISHLIST_SUCCESS,
     CLEAR_ERRORS,
+    Delete_WISHLIST_FAIL,
+    Delete_WISHLIST_REQUEST,
+    Delete_WISHLIST_SUCCESS,
     MY_WISHLIST_FAIL,
     MY_WISHLIST_REQUEST,
     MY_WISHLIST_SUCCESS,
@@ -46,4 +49,25 @@ export const addItem = (productId) => async (dispatch) => {
 
   export const clearErrs = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
+  };
+
+
+  export const deleteItem = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: Delete_WISHLIST_REQUEST });
+  
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.delete(`/api/v1/wishlist/remove/${id}`, config);
+  
+      dispatch({ type: Delete_WISHLIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: Delete_WISHLIST_FAIL,
+        payload: error.response.data.message,
+      });
+    }
   };
