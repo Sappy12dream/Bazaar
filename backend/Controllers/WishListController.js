@@ -18,7 +18,7 @@ exports.addToWishList = AsyncErrorHandler(async (req, res, next) => {
 exports.myWishList = AsyncErrorHandler(async (req, res, next) => {
   const items = await Wishlist.find({ user: req.user._id }).populate(
     "product",
-    "name description price ratings images category numberOfReviews reviews artist artistName createdAt"
+    "name description price ratings images category numberOfReviews reviews artist artistName createdAt whatsappLink"
   );
 
   res.status(200).json({

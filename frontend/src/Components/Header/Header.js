@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import {IoCloseSharp} from 'react-icons/io5'
@@ -44,9 +44,9 @@ console.log()
         {isAuthenticated ? (
           <>
             <div className="user_pic">
-              <img src={user.user.avatar.url} alt={user.user.name}/>
+              <img src={user.avatar.url} alt={user.name}/>
             </div>
-            <p className="user_name">{user.user.name}</p>
+            <p className="user_name">{user.name}</p>
             {Active?(<IoCloseSharp/>):(<IoIosArrowDown />)}
           </>
         ) : (
@@ -56,7 +56,7 @@ console.log()
 
       {
         isAuthenticated && (
-          <UserProfile user={user.user} Active={Active}/>
+          <UserProfile user={user} Active={Active}/>
         )
       }
     </div>

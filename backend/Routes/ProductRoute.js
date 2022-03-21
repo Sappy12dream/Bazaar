@@ -9,10 +9,12 @@ const {
   createProdutReview,
   getAllReviews,
   deleteReview,
+  getAllArtistProducts,
 } = require("../Controllers/ProductController");
 const { isAuth, authRoles } = require("../Middleware/auth");
 
-router.route("/products").get(getAllProducts);
+router.route("/products").get(getAllProducts)
+router.route("/artist/products").get(isAuth, authRoles("artist"),getAllArtistProducts);
 
 //Artist Route
 router.route("/product/new").post(isAuth, authRoles("artist"), createProduct);

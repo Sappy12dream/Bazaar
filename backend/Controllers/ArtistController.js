@@ -4,22 +4,29 @@ const Artist = require("../Model/ArtistModel");
 const sendToken = require("../utils/sendToken");
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
+const cloudinary = require("cloudinary");
+
 
 exports.createArtist = AsyncErrorHandler(async (req, res, next) => {
-  const { name, email, password, bio, whatsappLink } = req.body;
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "artistavatars",
+    width: 150,
+    crop: "scale",
+  });
+  const { name, email, password, whatsappLink } = req.body;
 
-  const artist = await Artist.create({
+  const user = await Artist.create({
     name,
     email,
     password,
     whatsappLink,
     avatar: {
-      pid: "pid",
-      url: "url",
+      pid: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
 
-  sendToken(artist, 201, res);
+  sendToken(user, 201, res);
 });
 
 exports.loginArtist = AsyncErrorHandler(async (req, res, next) => {
@@ -66,9 +73,7 @@ exports.forgotPassword = AsyncErrorHandler(async (req, res, next) => {
   const resetToken = artist.getResetpassToken();
   await artist.save({ validateBeforeSave: false });
 
-  const resetPassUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/artist/password/reset/${resetToken}`;
+  const resetPassUrl = `${process.env.FRONTEND_URL}/artist/password/reset/${resetToken}`;
 
   const message = `YourReset Password Token is \n\n ${resetPassUrl} \n if not requested please ignore`;
 
@@ -97,11 +102,11 @@ exports.resetPassword = AsyncErrorHandler(async (req, res, next) => {
     .update(req.params.token)
     .digest("hex");
 
-  const artist = await Artist.findOne({
+  const user = await Artist.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
   });
-  if (!artist) {
+  if (!user) {
     return next(
       new ErrorHandler("reset password token is invalid or expired", 400)
     );
@@ -113,18 +118,18 @@ exports.resetPassword = AsyncErrorHandler(async (req, res, next) => {
     );
   }
 
-  artist.password = req.body.password;
-  artist.resetPasswordToken = undefined;
-  artist.resetPasswordExpire = undefined;
-  await artist.save();
-  sendToken(artist, 200, res);
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+  sendToken(user, 200, res);
 });
 
 exports.getArtistDetails = AsyncErrorHandler(async (req, res, next) => {
-  const artist = await Artist.findById(req.user.id);
+  const user = await Artist.findById(req.user.id);
   res.status(200).json({
     success: true,
-    artist,
+    user,
   });
 });
 
@@ -151,7 +156,24 @@ exports.updateArtistDetails = AsyncErrorHandler(async (req, res, next) => {
     email: req.body.email,
     whatsappLink: req.body.whatsappLink,
   };
-  const artist = await Artist.findByIdAndUpdate(req.user.id, newUserData);
+
+  if (req.body.avatar !=="") {
+    const user = await Artist.findById(req.user.id);
+    const imgId = user.avatar.pid
+    await cloudinary.v2.uploader.destroy(imgId);
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "artistavatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
+      pid: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+    
+  }
+  const user = await Artist.findByIdAndUpdate(req.user.id, newUserData);
 
   res.status(200).json({
     success: true,

@@ -42,7 +42,6 @@ const artistSchema = new mongoose.Schema({
   whatsappLink: {
     type: String,
     required: [true, "Whatsapp link is required"],
-    validate: [validator.isURL, "Please enter a  valid whatsapp link"],
   },
   role: {
     type: String,

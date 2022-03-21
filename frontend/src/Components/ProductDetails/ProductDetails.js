@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
   getProductDetails,
+  newReview,
 } from "../../Redux/ActionCreater/ProductAction";
 import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
@@ -15,10 +16,14 @@ import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { addItem, clearErrs } from "../../Redux/ActionCreater/WishListAction";
+import { BiCommentAdd } from "react-icons/bi";
+import { Rating } from "@mui/material";
 
 function ProductDetails() {
+  const [rating, setrating] = useState(0);
+  const [comment, setComment] = useState('');
+  const [Active, setActive] = useState(false)
   const navigate = useNavigate();
-
   const alert = useAlert();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -26,6 +31,9 @@ function ProductDetails() {
     (state) => state.productDetails
   );
   const { loadng, success, err } = useSelector((state) => state.addwishList);
+  const { success:reviewSuccess, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -35,22 +43,40 @@ function ProductDetails() {
       alert.error(err);
       dispatch(clearErrs());
     }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrs());
+    }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert, err]);
+  }, [dispatch, id, error, alert, err,reviewError]);
 
-  
   const handleSubmit = (e) => {
     navigate("/login?redirect=wishList");
     if (product) {
-      let productId = product._id
+      let productId = product._id;
       dispatch(addItem(productId));
-      if(success){
-        alert.success("Item added to WishList Successfully!")
-
+      if (success) {
+        alert.success("Item added to WishList Successfully!");
       }
-      
     }
-   
+  };
+
+  const revSubmit = () => {
+    let productId = product._id;
+
+    const myForm = new FormData();
+
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId", productId);
+
+    dispatch(newReview(myForm));
+
+    setActive(false);
+    if(reviewSuccess){
+      alert.success("Review Added Successfully")
+    }
+    window.location.reload()
   };
 
   const style = { color: "white", fontSize: "20px" };
@@ -112,11 +138,39 @@ function ProductDetails() {
                     style={{
                       cursor: "pointer",
                       marginLeft: "10px",
+                      marginRight: "10px",
                       color: "red",
                     }}
                   />
-                  
+                  <BiCommentAdd 
+                  onClick={()=>setActive(true)}
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                      color: "#301934",
+
+                    }
+                  }
+                  />
                 </div>
+                {
+                  Active?(<div className="rev-form">
+                  <h4>Add Review!</h4>
+                  <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(e) => setrating(e.target.value)}
+                    precision={0.5}
+                  />
+                  <input type="text" placeholder="comment.."  onChange={(e)=>setComment(e.target.value)}/>
+                  <div>
+                    <button onClick={()=> setActive(false)}>Cancel</button>
+                    <button onClick={revSubmit}>Submit</button>
+                  </div>
+                </div>):(<></>)
+                }
+                
               </div>
             </div>
             <h3>Reviews</h3>

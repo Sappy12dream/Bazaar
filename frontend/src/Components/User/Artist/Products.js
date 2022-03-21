@@ -2,26 +2,23 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { ThreeDots } from "react-loader-spinner";
 import { useAlert } from "react-alert";
-import { clearErrs, myWishList } from '../../Redux/ActionCreater/WishListAction';
+import { clearErrors, getArtistProduct } from '../../../Redux/ActionCreater/ProductAction';
 import Product from './Product';
 
-function WishList() {
-
+function Products() {
     const alert = useAlert();
     const dispatch = useDispatch();
-    const { loading, error, items, nbHits, } =
-      useSelector((state) => state.myWishList);
+    const { loading, error, products,nbHits } =
+      useSelector((state) => state.artistProducts);
 
       useEffect(() => {
         if (error) {
           alert.error(error);
-          dispatch(clearErrs());
+          dispatch(clearErrors());
         }
-        dispatch(myWishList());
+        dispatch(getArtistProduct());
     
       }, [dispatch, error, alert]);
-
-  
   return (
     <>
       <div className="Product_screen wishlist">
@@ -45,8 +42,8 @@ function WishList() {
             
             </div>
             <div className="products-wrapper">
-              {items &&
-                items.map((product) => <Product product={product.product} key={product._id} id={product._id}/>)}
+              {products &&
+                products.map((product) => <Product product={product} key={product._id} id={product._id}/>)}
             </div>
           </>
         )}
@@ -55,4 +52,4 @@ function WishList() {
   )
 }
 
-export default WishList
+export default Products

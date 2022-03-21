@@ -10,6 +10,12 @@ import ChangePassword from '../ChangePassword/ChangePassword';
 import ForgotPassword from '../User/ForgotPassword';
 import ResetPassword from '../User/ResetPassword';
 import WishList from '../WishList/WishList';
+import LoginArtist from '../User/Artist/LoginArtist';
+import RegisterArtist from '../User/Artist/RegisterArtist';
+import ArtistForgotPassword from '../User/Artist/ArtistForgotPassword';
+import ArtistResetPassword from '../User/Artist/ArtistResetPassword';
+import CreateProduct from '../User/Artist/CreateProduct';
+import Products from '../User/Artist/Products';
 
 
 const Home = () => {
@@ -22,12 +28,19 @@ const Home = () => {
        <Route path="/product/:id" element={<ProductDetails/>} />
 
       <Route path="/login" element={<Login/>} />
+      <Route path="/artist" element={<div>artist</div>} />
+      <Route path="/login/artist" element={<LoginArtist/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="/artist/product/create" element={<CreateProduct/>} />
+      <Route path="/register/artist" element={<RegisterArtist/>} />
       <Route path="/me/update" element={<UpdateProfile/>} />
       <Route path="/password/change" element={<ChangePassword/>} />
       <Route path="/forgot" element={<ForgotPassword/>} />
+      <Route path="/artist/forgot" element={<ArtistForgotPassword/>} />
       <Route path="/wishlist" element={<WishList/>} />
+      <Route path="/artist/products" element={<Products/>} />
       <Route path="/password/reset/:token" element={<ResetPassword/>} />
+      <Route path="/artist/password/reset/:token" element={<ArtistResetPassword/>} />
        </Routes>
     </div>
   )

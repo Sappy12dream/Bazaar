@@ -4,11 +4,12 @@ import { ThreeDots } from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { clearErrors, resetPassword } from '../../Redux/ActionCreater/UserAction';
+import { artistResetPassword } from '../../../Redux/ActionCreater/ArtistAction';
+import { clearErrors } from '../../../Redux/ActionCreater/UserAction';
 
+function ArtistResetPassword() {
 
-function ResetPassword() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
     const navigate = useNavigate()
     const {token} = useParams()
 
@@ -30,7 +31,7 @@ function ResetPassword() {
         myForm.set("password", password);
         myForm.set("confirmPassword", confirmPassword);
     
-        dispatch(resetPassword(token, myForm));
+        dispatch(artistResetPassword(token, myForm));
       };
     
       useEffect(() => {
@@ -42,7 +43,7 @@ function ResetPassword() {
         if (success) {
           alert.success("Password Updated Successfully");
     
-          navigate("/login");
+          navigate("/login/artist");
         }
       }, [dispatch, error, alert, navigate, success]);
   
@@ -89,4 +90,4 @@ function ResetPassword() {
     )
 }
 
-export default ResetPassword
+export default ArtistResetPassword

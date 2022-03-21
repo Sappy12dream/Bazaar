@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { ThreeDots } from "react-loader-spinner";
@@ -11,18 +10,23 @@ import {
 } from "../../Redux/ActionCreater/UserAction";
 import { USER_UPDATE_RESET } from "../../Redux/ActionTypes/userActionType";
 import { useNavigate } from "react-router-dom";
+import {
+  loadArtist,
+  updateArtistProfile,
+} from "../../Redux/ActionCreater/ArtistAction";
 
 function UpdateProfile() {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.user);
+  const { user, role } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState();
+  const [whatsappLink, setwhatsappLink] = useState();
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const updateProfileSubmit = (e) => {
@@ -33,7 +37,14 @@ function UpdateProfile() {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("avatar", avatar);
-    dispatch(updateUserProfile(myForm));
+    myForm.set("whatsappLink", whatsappLink);
+
+    if (role === "artist") {
+      dispatch(updateArtistProfile(myForm));
+      console.log(true);
+    } else {
+      dispatch(updateUserProfile(myForm));
+    }
   };
 
   const updateProfileDataChange = (e) => {
@@ -51,9 +62,10 @@ function UpdateProfile() {
 
   useEffect(() => {
     if (user) {
-      setName(user.user.name);
-      setEmail(user.user.email);
-      setAvatarPreview(user.user.avatar.url);
+      setName(user.name);
+      setEmail(user.email);
+      setAvatarPreview(user.avatar.url);
+      setwhatsappLink(user.whatsappLink);
     }
 
     if (error) {
@@ -63,7 +75,11 @@ function UpdateProfile() {
 
     if (isUpdated) {
       alert.success("Profile Updated Successfully");
-      dispatch(loadUser());
+      if (role === "artist") {
+        dispatch(loadArtist());
+      } else {
+        dispatch(loadUser());
+      }
 
       navigate("/");
 
@@ -71,7 +87,7 @@ function UpdateProfile() {
         type: USER_UPDATE_RESET,
       });
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, alert, navigate, user, isUpdated,role]);
   return (
     <>
       {loading ? (
@@ -104,6 +120,16 @@ function UpdateProfile() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            {role === "artist" && (
+              <input
+                type="url"
+                placeholder="whatsapp link..."
+                name="whatsappLink"
+                value={whatsappLink}
+                onChange={(e) => setwhatsappLink(e.target.value)}
+                required
+              />
+            )}
 
             <div className="pic">
               <img src={avatarPreview} alt="Avatar Preview" />
@@ -116,9 +142,7 @@ function UpdateProfile() {
               />
             </div>
             <input type="submit" value="Update" className="login-btn" />
-
           </form>
-
         </div>
       )}
     </>

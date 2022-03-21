@@ -21,10 +21,23 @@ exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
     .json({ nbHits: products.length, productCount, products, resultPerPage });
 });
 
+//get all products - admin
+
+exports.getAllArtistProducts = AsyncErrorHandler(async (req, res, next) => {
+  
+  const products = await Product.find({ artist: req.user._id })
+  res
+    .status(201)
+    .json({ nbHits: products.length, products });
+});
+
 //create product - Artist
 exports.createProduct = AsyncErrorHandler(async (req, res, next) => {
   req.body.artist = req.user.id;
   req.body.artistName = req.user.name;
+  req.body.whatsappLink = req.user.whatsappLink;
+  req.body.avatar = req.user.avatar;
+
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,

@@ -8,21 +8,29 @@ import { useAlert } from "react-alert";
 import {RiLogoutBoxRLine} from 'react-icons/ri'
 import {logoutUser} from '../../Redux/ActionCreater/UserAction'
 import { useNavigate } from "react-router-dom";
+import {IoColorPaletteOutline} from 'react-icons/io5'
+import {FaUserLock} from 'react-icons/fa'
+import { logoutArtist } from "../../Redux/ActionCreater/ArtistAction";
 function Navbar() {
   const navigate = useNavigate()
   const alert = useAlert()
 
   const [darkTheme, setDarkTheme] = useState(false);
-  const { isAuthenticated } = useSelector(
+  const { role , isAuthenticated} = useSelector(
     (state) => state.user
   );
 
   const logOutUser = ()=>{
+    
     dispatch(logoutUser());
     alert.success("Logout Successfully!")
     navigate("/")
   }
-
+const logOutArtist = () =>{
+  dispatch(logoutArtist());
+    alert.success("Logout Successfully!")
+    navigate("/")
+}
 const dispatch = useDispatch()
   useEffect(() => {
 
@@ -45,14 +53,33 @@ const dispatch = useDispatch()
           <FaHome />
           <span>Home</span>
         </Link>
-        <Link to="/wishlist">
+        {
+          isAuthenticated && (<Link to="/wishlist">
           <MdFavorite />
           <span>Wish-List</span>
+        </Link>)
+        }
+        
+        <Link to="/login/artist">
+          <FaUserLock />
+          <span>Artist</span>
         </Link>
+        {
+          role === 'artist' && (
+            <Link to="/artist/products">
+          <FaUserLock />
+          <span>Created Products </span>
+        </Link>
+          )
+        }
       </div>
-      <button onClick={() => setDarkTheme(!darkTheme)}>change</button>
-{isAuthenticated && (
+      <IoColorPaletteOutline onClick={() => setDarkTheme(!darkTheme)}/>change
+{role==="user" && (
       <button onClick={logOutUser} className='logout-btn'><RiLogoutBoxRLine/><span>logout</span></button>
+
+)}
+{role==="artist" && (
+      <button onClick={logOutArtist} className='logout-btn'><RiLogoutBoxRLine/><span>logout Artist</span></button>
 
 )}
     </div>

@@ -3,6 +3,7 @@ import { useAlert } from 'react-alert';
 import { ThreeDots } from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { updateArtistPassword } from '../../Redux/ActionCreater/ArtistAction';
 import { clearErrors, updateUserPassword } from '../../Redux/ActionCreater/UserAction';
 import { USER_UPDATE_PASSWORD_RESET } from '../../Redux/ActionTypes/userActionType';
 
@@ -13,6 +14,7 @@ function ChangePassword() {
 
 
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
+  const { role } = useSelector((state) => state.user);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -26,8 +28,12 @@ function ChangePassword() {
     myForm.set("oldPassword", oldPassword);
     myForm.set("newPassword", newPassword);
     myForm.set("confirmPassword", confirmPassword);
+if(role==='artist'){
+dispatch(updateArtistPassword(myForm))
+}else{
+  dispatch(updateUserPassword(myForm));
 
-    dispatch(updateUserPassword(myForm));
+}
   };
 
   useEffect(() => {

@@ -29,6 +29,18 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
+  avatar:
+    {
+      pid: {
+        type: String,
+        required: [true, "PID required"],
+      },
+      url: {
+        type: String,
+        required: [true, "url"],
+      },
+    },
+  
   category: {
     type: String,
     required: [true, "category required"],
@@ -66,6 +78,10 @@ const productSchema = new mongoose.Schema({
   artistName: {
     type: String,
     required: true,
+  },
+  whatsappLink:{
+    type:String,
+    required:true
   },
   createdAt: {
     type: Date,

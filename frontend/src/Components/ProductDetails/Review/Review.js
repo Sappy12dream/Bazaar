@@ -6,7 +6,7 @@ function Review({rev}) {
         edit:false,
         activeColor:'yellow',
         color:"grey",
-        value:4,
+        value:rev.rating,
         isHalf:true,
         size:12
       }
