@@ -13,18 +13,35 @@
         position: absolute;
         right: 0;
         top: 0;
+        font-size: 20px;
         cursor: pointer;
-        .remove{
-            cursor: pointer;
+        .options{
             position: absolute;
             right: 10%;
             top: 80%;
-            background-color: beige;
-            color: black;
-            padding: 2px;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
             border-radius: 5px;
-            font-size: 12px;
+
+            button{
+                cursor: pointer;          
+                background-color: black;
+                color: white;
+                padding: 5px;
+                font-size: 14px;
+                outline: none;
+                border: none;
+            border-radius: 5px;
+            a{
+                font-size: 14px;
+                color: white;
+                padding: 5px;
+            }
+
+            }
         }
+  
         
     }
 }

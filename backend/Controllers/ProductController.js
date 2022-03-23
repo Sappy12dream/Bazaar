@@ -2,6 +2,7 @@ const AsyncErrorHandler = require("../Middleware/AsyncErrorHandler");
 const Product = require("../Model/ProductModel");
 const ApiFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../Utils/errorHandler");
+const cloudinary = require("cloudinary");
 
 //get all products - user
 exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
@@ -33,10 +34,34 @@ exports.getAllArtistProducts = AsyncErrorHandler(async (req, res, next) => {
 
 //create product - Artist
 exports.createProduct = AsyncErrorHandler(async (req, res, next) => {
+let images = []
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  const imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "products",
+      
+    });
+
+    imagesLinks.push({
+      pid: result.public_id,
+      url: result.secure_url,
+    });
+  }
+  
+  
   req.body.artist = req.user.id;
   req.body.artistName = req.user.name;
   req.body.whatsappLink = req.user.whatsappLink;
   req.body.avatar = req.user.avatar;
+  req.body.images = imagesLinks;
 
   const product = await Product.create(req.body);
   res.status(201).json({
@@ -49,11 +74,45 @@ exports.createProduct = AsyncErrorHandler(async (req, res, next) => {
 
 exports.updateProduct = AsyncErrorHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
+  
   if (!product) {
     return next(new ErrorHandler("product not found", 404));
   }
+
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  if (images !== undefined) {
+    // Deleting Images From Cloudinary
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.v2.uploader.destroy(product.images[i].pid);
+    }
+
+    const imagesLinks = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(images[i], {
+        folder: "products",
+      });
+
+      imagesLinks.push({
+        pid: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
+    req.body.images = imagesLinks;
+  }
+
   product = await Product.findByIdAndUpdate(req.params.id, req.body);
-  res.status(201).json(product);
+  res.status(201).json({
+    success:true
+  });
 });
 
 //Delete product - Artist

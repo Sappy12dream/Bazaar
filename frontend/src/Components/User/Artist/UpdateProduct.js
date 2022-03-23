@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   clearErrors,
-  createProduct,
+  getProductDetails,
 } from "../../../Redux/ActionCreater/ProductAction";
-import { ADD_PRODUCT_RESET } from "../../../Redux/ActionTypes/productActionType";
-
-function CreateProduct() {
+import { useNavigate } from "react-router-dom";
+import { updateProduct } from "../../../Redux/ActionCreater/ProductAction";
+function UpdateProduct() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const { id } = useParams();
   const navigate = useNavigate();
+  const alert = useAlert();
+
+  const { error, product } = useSelector((state) => state.productDetails);
+
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+    
+  } = useSelector((state) => state.product);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
+  const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const { loading, error, success } = useSelector((state) => state.addProduct);
   const categories = [
     "Ceramics crafts",
     "glass crafts",
@@ -36,21 +47,44 @@ function CreateProduct() {
     "Other",
   ];
 
+  const productId = id;
+
   useEffect(() => {
+    if (product && product._id !== productId) {
+      dispatch(getProductDetails(productId));
+    } else {
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+      setCategory(product.category);
+      setOldImages(product.images);
+    }
     if (error) {
       alert.error(error);
-      console.log(error);
       dispatch(clearErrors());
     }
 
-    if (success) {
-      alert.success("Product Created Successfully");
-      navigate("/artist/products");
-      dispatch({ type: ADD_PRODUCT_RESET });
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, navigate, success]);
 
-  const createProductSubmitHandler = (e) => {
+    if (isUpdated) {
+      alert.success("Product Updated Successfully");
+      navigate("/artist/products");
+    }
+  }, [
+    dispatch,
+    alert,
+    error,
+    navigate,
+    isUpdated,
+    productId,
+    product,
+    updateError,
+  ]);
+
+  const updateProductSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -63,14 +97,15 @@ function CreateProduct() {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(createProduct(myForm));
+    dispatch(updateProduct(productId, myForm));
   };
 
-  const createProductImagesChange = (e) => {
+  const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
 
     setImages([]);
     setImagesPreview([]);
+    setOldImages([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -85,16 +120,16 @@ function CreateProduct() {
       reader.readAsDataURL(file);
     });
   };
-
   return (
     <div className=" Register Login">
       <h3>Create Product!</h3>
       <p>Fill up the form to create</p>
-      <form encType="multipart/form-data" onSubmit={createProductSubmitHandler}>
+      <form encType="multipart/form-data" onSubmit={updateProductSubmitHandler}>
         <input
           type="text"
           placeholder="name"
           name="name"
+          value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
@@ -103,6 +138,7 @@ function CreateProduct() {
           placeholder="price"
           name="price"
           required
+          value={price}
           min={0}
           onChange={(e) => setPrice(e.target.value)}
           step=".01"
@@ -112,11 +148,10 @@ function CreateProduct() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           cols="40"
-          
           rows="4"
         ></textarea>
         <select onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Choose Category</option>
+          <option value={category}>Choose Category</option>
           {categories.map((cate) => (
             <option key={cate} value={cate}>
               {cate}
@@ -128,25 +163,39 @@ function CreateProduct() {
             type="file"
             name="avatar"
             accept="image/*"
-            onChange={createProductImagesChange}
+            onChange={updateProductImagesChange}
             multiple
           />
         </div>
+        <div className="createProductFormImage">
+          {oldImages &&
+            oldImages.map((image, index) => (
+              <img key={index} src={image.url} alt="Old Product Preview" />
+            ))}
+        </div>
+
         <div className="createProductFormImage">
           {imagesPreview.map((image, index) => (
             <img key={index} src={image} alt="Product Preview" />
           ))}
         </div>
+
         <input
           type="submit"
-          value="Create"
+          value="Update"
           className="login-btn"
           disabled={loading ? true : false}
         />
-        <button className="cancel-btn" disabled={loading ? true : false} onClick={()=>navigate("/artist/products")}>Cancel</button>
+        <button
+          className="cancel-btn"
+          disabled={loading ? true : false}
+          onClick={() => navigate("/artist/products")}
+        >
+          Cancel
+        </button>
       </form>
     </div>
   );
 }
 
-export default CreateProduct;
+export default UpdateProduct;

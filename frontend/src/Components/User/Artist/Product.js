@@ -1,14 +1,16 @@
 
-import { useState } from "react";
+import {  useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { ImWhatsapp } from "react-icons/im";
 import { AiFillHeart } from "react-icons/ai";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function Product({product,id}) {
+function Product({product, id , deleteH}) {
   const [Active, setActive] = useState(false);
+
 
     const { loading,  } = useSelector((state) => state.artistProducts);
     const options = {
@@ -36,9 +38,13 @@ function Product({product,id}) {
         <span className="dots" onClick={() => setActive(!Active)}>
           <BiDotsVerticalRounded />
           {Active ? (
-            <button className="remove" >
-              remove
+            <div className="options">
+            <button><Link to={`/update/product/${id}`}>Update</Link></button>
+            <button className="remove" onClick={()=>deleteH(id)} >
+              Delete
             </button>
+            </div>
+            
           ) : (
             <></>
           )}

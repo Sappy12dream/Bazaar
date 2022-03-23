@@ -60,10 +60,11 @@ const dispatch = useDispatch()
         </Link>)
         }
         
+        {!role==="artist" &&
         <Link to="/login/artist">
           <FaUserLock />
           <span>Artist</span>
-        </Link>
+        </Link>}
         {
           role === 'artist' && (
             <Link to="/artist/products">

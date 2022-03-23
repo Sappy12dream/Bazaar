@@ -9,6 +9,8 @@ import {
   Delete_WISHLIST_REQUEST,
   Delete_WISHLIST_SUCCESS,
   CLEAR_ERRORS,
+  ADD_TO_WISHLIST_RESET,
+  Delete_WISHLIST_RESET,
 } from "../ActionTypes/whishlistActionType";
 
 export const addItemReducer = (state = {}, action) => {
@@ -25,6 +27,7 @@ export const addItemReducer = (state = {}, action) => {
       return {
         loadng: false,
         success: action.payload.success,
+        message: action.payload.message
       };
 
     case ADD_TO_WISHLIST_FAIL:
@@ -33,6 +36,13 @@ export const addItemReducer = (state = {}, action) => {
         loading: false,
         err: action.payload,
       };
+    case ADD_TO_WISHLIST_RESET:
+      case Delete_WISHLIST_RESET:
+        return{
+          ...state,
+          success:false,
+          message:null
+        }
     case CLEAR_ERRORS:
       return {
         ...state,
@@ -54,8 +64,10 @@ export const myWishListReducer = (state = { items: [] }, action) => {
     case MY_WISHLIST_SUCCESS:
       return {
         loading: false,
+        success:action.payload.success,
         items: action.payload.items,
         nbHits: action.payload.nbHits,
+        
       };
 
     case MY_WISHLIST_FAIL:

@@ -30,7 +30,7 @@ function ProductDetails() {
   const { loading, product, error } = useSelector(
     (state) => state.productDetails
   );
-  const { loadng, success, err } = useSelector((state) => state.addwishList);
+  const { loadng, success, err} = useSelector((state) => state.addwishList);
   const { success:reviewSuccess, error: reviewError } = useSelector(
     (state) => state.newReview
   );
@@ -51,14 +51,17 @@ function ProductDetails() {
   }, [dispatch, id, error, alert, err,reviewError]);
 
   const handleSubmit = (e) => {
-    navigate("/login?redirect=wishList");
+    navigate("/login?redirect=/");
+
     if (product) {
       let productId = product._id;
       dispatch(addItem(productId));
       if (success) {
         alert.success("Item added to WishList Successfully!");
+        
       }
     }
+
   };
 
   const revSubmit = () => {
@@ -82,7 +85,7 @@ function ProductDetails() {
   const style = { color: "white", fontSize: "20px" };
   return (
     <>
-      {loading || loadng ? (
+      {loading && loadng ? (
         <div className="loader">
           <ThreeDots
             type="Spinner Type"
@@ -121,8 +124,11 @@ function ProductDetails() {
                 <div className="artist">
                   <span>Created By</span>
                   <div className="artist_info">
-                    <div className="logo"></div>
                     <p>{product.artistName}</p>
+                  </div>
+                  <span>Created At</span>
+                  <div className="artist_info">
+                    <p>{product.createdAt}</p>
                   </div>
                 </div>
                 <div className="price">
@@ -130,9 +136,9 @@ function ProductDetails() {
                   <span>{product.price} RS</span>
                 </div>
                 <div className="action">
-                  <Link to="/">
+                  <a href={product.whatsappLink} target="_blank" rel="noopener noreferrer">
                     <IoLogoWhatsapp style={{ color: "green" }} />
-                  </Link>
+                  </a>
                   <RiHeartAddFill
                     onClick={handleSubmit}
                     style={{

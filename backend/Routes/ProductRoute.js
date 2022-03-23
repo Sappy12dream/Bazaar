@@ -17,7 +17,7 @@ router.route("/products").get(getAllProducts)
 router.route("/artist/products").get(isAuth, authRoles("artist"),getAllArtistProducts);
 
 //Artist Route
-router.route("/product/new").post(isAuth, authRoles("artist"), createProduct);
+router.route("/new/product").post(isAuth, authRoles("artist"), createProduct);
 router
   .route("/product/:id")
   .put(isAuth, authRoles("artist"), updateProduct)

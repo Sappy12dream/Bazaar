@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { ImWhatsapp } from "react-icons/im";
-import { AiFillHeart } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,20 +29,20 @@ function Product({ product, id }) {
   const removeItem = (e) => {
     e.preventDefault();
     dispatch(deleteItem(id));
+    alert.success("Removed");
    
-      alert.success("Removed");
-    
+    if(success){
+      navigate('/wishlist')
+      window.location.reload()
+    }
   };
   useEffect(() => {
     if (err) {
       alert.error(err);
       dispatch(clearErrs());
     }
-    if(success){
-    window.location.reload();
-
-    }
-  }, [dispatch, alert, err,success]);
+    
+  }, [dispatch, alert, err]);
   return (
     <>
       {loadng ? (
@@ -60,9 +59,11 @@ function Product({ product, id }) {
           <span className="dots" onClick={() => setActive(!Active)}>
             <BiDotsVerticalRounded />
             {Active ? (
+              <div className="options">
               <button className="remove" onClick={removeItem}>
                 remove
               </button>
+              </div>
             ) : (
               <></>
             )}
@@ -86,11 +87,10 @@ function Product({ product, id }) {
                 <span>{`(${product.numberOfReviews} reviews)`}</span>
               </div>
 
-              <div>
-                <span>
-                  <ImWhatsapp />
-                </span>
-                <AiFillHeart />
+              <div className="link">
+                <a href={product.whatsappLink}>
+                  <ImWhatsapp style={{color: '#90EE90', fontSize: "20px", }}/>
+                </a>
               </div>
             </div>
           </div>

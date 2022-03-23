@@ -16,6 +16,7 @@ import ArtistForgotPassword from '../User/Artist/ArtistForgotPassword';
 import ArtistResetPassword from '../User/Artist/ArtistResetPassword';
 import CreateProduct from '../User/Artist/CreateProduct';
 import Products from '../User/Artist/Products';
+import UpdateProduct from '../User/Artist/UpdateProduct';
 
 
 const Home = () => {
@@ -39,6 +40,7 @@ const Home = () => {
       <Route path="/artist/forgot" element={<ArtistForgotPassword/>} />
       <Route path="/wishlist" element={<WishList/>} />
       <Route path="/artist/products" element={<Products/>} />
+      <Route path="/update/product/:id" element={<UpdateProduct/>} />
       <Route path="/password/reset/:token" element={<ResetPassword/>} />
       <Route path="/artist/password/reset/:token" element={<ArtistResetPassword/>} />
        </Routes>

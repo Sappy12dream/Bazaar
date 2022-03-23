@@ -10,7 +10,21 @@ function SubHeader({ setprice, setratings, setcategory }) {
   const [Activecategory, setActivecategory] = useState(false);
   const [ActiveRating, setActiveRating] = useState(false);
   const priceVal = [5000, 4000, 3000, 1000, 500, 300];
-  const categoryVal = ["home decor", "Decor", "room"];
+  
+  const categoryVal = [
+    "Ceramics crafts",
+    "glass crafts",
+    "textile crafts",
+    "Flower crafts",
+    "Leatherwork",
+    "Houseware",
+    "Fashion",
+    "Needlework",
+    "Paper crafts",
+    "Mixed media crafts",
+    "Wood Crafts",
+    "Other",
+  ];
   const ratingVal = [1, 2, 3, 4];
   const { role } = useSelector((state) => state.user);
   return (
@@ -70,12 +84,13 @@ function SubHeader({ setprice, setratings, setcategory }) {
             >
               {categoryVal.map((val) => (
                 <div className="item" onClick={() => setcategory(val)}>
-                  {val} <span> Decor</span>
+                  {val}
                 </div>
               ))}
             </div>
           )}
         </>
+        <div className="category_filter filter" onClick={()=>window.location.reload()}>Reset</div>
       </div>
       {role === "artist" && (
         <Link to='artist/product/create'className="add_btn" >

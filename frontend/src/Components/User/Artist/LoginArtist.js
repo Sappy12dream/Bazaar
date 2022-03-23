@@ -24,7 +24,7 @@ function LoginArtist() {
     }
     if (role === "artist") {
       console.log(true);
-      navigate("/artist");
+      navigate("/artist/products");
     }
   }, [dispatch, error, alert, role, navigate]);
   const handleLogin = (e) => {

@@ -60,7 +60,7 @@ function RegisterArtist() {
           dispatch(clearErrors());
         }
         if (role==='artist') {
-          navigate("/artist");
+          navigate("/artist/products");
         }
       }, [dispatch, error, alert, role, navigate]);
   return (
@@ -78,7 +78,7 @@ function RegisterArtist() {
    ( <div className=" Register Login">
       <h3>Get Started!</h3>
       <p>Register on Bazaar</p>
-      <form>
+      <form encType="multipart/form-data">
         <input
           type="text"
           placeholder="username"
