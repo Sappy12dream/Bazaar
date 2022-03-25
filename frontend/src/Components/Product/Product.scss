@@ -1,9 +1,9 @@
 .Product {
   width: 330px;
   height: 280px;
-  background-color: var(--text-color);
+  background-color: var(--dark-color);
   border-radius: 5px;
-  color: var(--background-color);
+  color: var(--text-color);
   &:hover{
       box-shadow: 5px 10px 8px black;
   }

@@ -37,7 +37,7 @@ console.log()
           onChange={(event) => setkeyword(event.target.value)}
         />
         <button type="submit" onClick={handleSubmit}>
-          search
+          Search
         </button>
       </form>
       <div className="user_profile" onClick={()=>setActive(!Active)}>

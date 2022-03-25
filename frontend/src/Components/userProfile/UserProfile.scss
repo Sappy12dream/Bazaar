@@ -1,14 +1,14 @@
 .user-profile{
    
     position: absolute;
-    background-color: black;
-    color: white;
+    background-color: var(--main);
+    color: var(--text-color);
     right: 10px;
     top: 60px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     a{
-        color: aliceblue;
+        color: var(--text-color);
     }
     div{
         display: flex;

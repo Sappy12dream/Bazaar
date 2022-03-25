@@ -41,7 +41,7 @@ function SubHeader({ setprice, setratings, setcategory }) {
           {ActivePrice && (
             <div className="list" onClick={() => setActivePrice(!ActivePrice)}>
               {priceVal.map((val) => (
-                <div className="item" onClick={() => setprice(val)}>
+                <div className="item" onClick={() => setprice(val)}  key={val}>
                   <span>Below</span> {val}
                 </div>
               ))}
@@ -62,7 +62,7 @@ function SubHeader({ setprice, setratings, setcategory }) {
               onClick={() => setActiveRating(!ActiveRating)}
             >
               {ratingVal.map((val) => (
-                <div className="item" onClick={() => setratings(val)}>
+                <div className="item" onClick={() => setratings(val)} key={val}>
                   <span>Above</span> {val}
                 </div>
               ))}
@@ -83,7 +83,7 @@ function SubHeader({ setprice, setratings, setcategory }) {
               onClick={() => setActivecategory(!Activecategory)}
             >
               {categoryVal.map((val) => (
-                <div className="item" onClick={() => setcategory(val)}>
+                <div className="item" onClick={() => setcategory(val)}  key={val}>
                   {val}
                 </div>
               ))}

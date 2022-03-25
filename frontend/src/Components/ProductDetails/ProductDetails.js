@@ -154,7 +154,7 @@ function ProductDetails() {
                       cursor: "pointer",
                       marginLeft: "10px",
                       marginRight: "10px",
-                      color: "#301934",
+                      color: "Orange",
 
                     }
                   }
