@@ -13,13 +13,16 @@ exports.createArtist = AsyncErrorHandler(async (req, res, next) => {
     width: 150,
     crop: "scale",
   });
-  const { name, email, password, whatsappLink } = req.body;
-
+  const { name, email, password, whatsappLink,secretKey } = req.body;
+if(secretKey !== "chaycjwsvxbuoadhvncoifdhoi"){
+return next(new ErrorHandler("secret key is invalid, contact Admin for more information"),404)
+}
   const user = await Artist.create({
     name,
     email,
     password,
     whatsappLink,
+
     avatar: {
       pid: myCloud.public_id,
       url: myCloud.secure_url,

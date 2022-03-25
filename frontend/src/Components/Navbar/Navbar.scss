@@ -27,9 +27,7 @@
             span{
                 margin-left: 10px;
             }
-            &:active{
-                background-color: blueviolet;
-            }
+            
         }
     }
 }
@@ -74,4 +72,10 @@ text-align: left;
     span{
         margin-left: 10px;
     }
+}
+
+
+.active{
+    background-color: rgb(66, 66, 253);
+    border-radius: 5px;
 }

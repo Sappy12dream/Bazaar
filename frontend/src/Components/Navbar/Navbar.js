@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { FaUserLock } from "react-icons/fa";
 import { logoutArtist } from "../../Redux/ActionCreater/ArtistAction";
+import { NavLink } from "react-router-dom";
 function Navbar() {
   const navigate = useNavigate();
   const alert = useAlert();
@@ -48,27 +49,27 @@ console.log(role);
         <h1>Bazaar</h1>
       </div>
       <div className="menu">
-        <Link to="/">
+        <NavLink to="/" activeClassName="active">
           <FaHome />
           <span>Home</span>
-        </Link>
+        </NavLink>
         {isAuthenticated && (
-          <Link to="/wishlist">
+          <NavLink to="/wishlist" activeClassName="active">
             <MdFavorite />
             <span>Wish-List</span>
-          </Link>
+          </NavLink>
         )}
 
         
-        {role==="user" &&(<Link to="/login/artist">
+        {role==="user" &&(<NavLink to="/login/artist" activeClassName="active">
             <FaUserLock />
             <span>Artist</span>
-          </Link>)}
+          </NavLink>)}
         {role === "artist" && (
-          <Link to="/artist/products">
+          <NavLink to="/artist/products" activeClassName="active">
             <FaUserLock />
             <span>My Products </span>
-          </Link>
+          </NavLink>
         )}
       </div>
       <button className="btn" onClick={() => setDarkTheme(!darkTheme)} ><IoColorPaletteOutline />

@@ -17,13 +17,13 @@ function RegisterArtist() {
     name: "",
     email: "",
     password: "",
-    whatsappLink:""
+    whatsappLink:"",
+    secretKey:""
   });
   const { error, loading,role } = useSelector(
     (state) => state.user
   );
-  const { name, email, password, whatsappLink} = user;
-
+  const { name, email, password, whatsappLink, secretKey} = user;
   const registerSubmit = (e) => {
     e.preventDefault();
 
@@ -34,6 +34,7 @@ function RegisterArtist() {
     myForm.set("password", password);
     myForm.set("avatar", avatar);
     myForm.set("whatsappLink", whatsappLink);
+    myForm.set("secretKey", secretKey);
     dispatch(artistRegister(myForm));
   };
     const [avatar, setAvatar] = useState("/logo512.png");
@@ -104,6 +105,13 @@ function RegisterArtist() {
           type="url"
           placeholder="whatsapp link..."
           name="whatsappLink"
+          onChange={registerDataChange}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Secret Key..."
+          name="secretKey"
           onChange={registerDataChange}
           required
         />
