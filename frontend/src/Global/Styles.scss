@@ -41,9 +41,10 @@ $dar_grey_: #383838;
 $grey: #6a6767;
 
 .App {
+  overflow-x: hidden;
   width: 100%;
   height: 100vh;
-  background-color: var(--text-color);
+  background-color: var(--dark-color);
   color: var(--text-color);
   display: flex;
   position: relative;
