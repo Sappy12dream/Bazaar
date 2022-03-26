@@ -17,6 +17,8 @@ import ArtistResetPassword from '../User/Artist/ArtistResetPassword';
 import CreateProduct from '../User/Artist/CreateProduct';
 import Products from '../User/Artist/Products';
 import UpdateProduct from '../User/Artist/UpdateProduct';
+import Users from '../User/Admin/Users';
+import Artists from '../User/Admin/Artists';
 
 
 const Home = () => {
@@ -29,6 +31,8 @@ const Home = () => {
        <Route path="/product/:id" element={<ProductDetails/>} />
 
       <Route path="/login" element={<Login/>} />
+      <Route path="/admin/users" element={<Users/>} />
+      <Route path="/admin/artists" element={<Artists/>} />
       <Route path="/artist" element={<div>artist</div>} />
       <Route path="/login/artist" element={<LoginArtist/>} />
       <Route path="/register" element={<Register/>} />

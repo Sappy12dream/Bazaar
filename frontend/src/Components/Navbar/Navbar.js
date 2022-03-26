@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { FaOpencart, FaHome } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { RiLogoutBoxRLine } from "react-icons/ri";
@@ -63,14 +62,23 @@ console.log(role);
         
         {role==="user" &&(<NavLink to="/login/artist" activeClassName="active">
             <FaUserLock />
-            <span>Artist</span>
+            <span>Artist</span> 
           </NavLink>)}
+          
         {role === "artist" && (
           <NavLink to="/artist/products" activeClassName="active">
             <FaUserLock />
             <span>My Products </span>
           </NavLink>
         )}
+        {role==="admin" &&(<NavLink to="/admin/users" activeClassName="active">
+            <FaUserLock />
+            <span>Users</span>
+          </NavLink>)}
+          {role==="admin" &&(<NavLink to="/admin/artists" activeClassName="active">
+            <FaUserLock />
+            <span>Artists</span>
+          </NavLink>)}
       </div>
       <button className="btn" onClick={() => setDarkTheme(!darkTheme)} ><IoColorPaletteOutline />
       <span>Change</span></button>

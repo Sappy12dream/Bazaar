@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { addProductReducer, ArtistProductsReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from "./Reducers/ProductReducer";
 import { forgotPasswordReducer, updateUserReducer, userReducer } from "./Reducers/UserReducer";
 import { addItemReducer, myWishListReducer } from "./Reducers/WishlistReducer";
+import { artistListReducer, userListReducer } from "./Reducers/AdminReducer";
 
 const reducer = combineReducers({
     products : productsReducer,
@@ -16,7 +17,9 @@ const reducer = combineReducers({
     newReview: newReviewReducer,
     artistProducts: ArtistProductsReducer,
     addProduct: addProductReducer,
-    product: productReducer
+    product: productReducer,
+    users: userListReducer,
+    artists: artistListReducer
 });
 
 const initialState = {};
