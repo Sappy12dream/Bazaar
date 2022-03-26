@@ -17,7 +17,6 @@ function Navbar() {
 
   const [darkTheme, setDarkTheme] = useState(false);
   const { role, isAuthenticated } = useSelector((state) => state.user);
-console.log(role);
   const logOutUser = () => {
     dispatch(logoutUser());
     alert.success("Logout Successfully!");
@@ -89,7 +88,7 @@ console.log(role);
           <span>Logout</span>
         </button>
       )}
-      {role === "artist" || role==="admin" (
+      {role === "artist" && (
         <button className="btn"onClick={logOutArtist}>
           <RiLogoutBoxRLine />
           <span>Logout Artist</span>
