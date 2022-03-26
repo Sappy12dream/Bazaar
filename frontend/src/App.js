@@ -13,12 +13,12 @@ function App() {
 
     store.dispatch(loadArtist())
   }, [])
-  return (
+    
+
+return (
     <div className="App">
       <Navbar />
-      <Home />
-    
-      
+      <Home /> 
     </div>
   );
 }
