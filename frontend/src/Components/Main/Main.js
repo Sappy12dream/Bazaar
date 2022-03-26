@@ -7,7 +7,6 @@ function Main() {
   const [price, setprice] = useState()
   const [ratings, setratings] = useState()
   const [category, setcategory] = useState()
-  console.log(price)
   return (
     <div className='Main'>
         <SubHeader  setprice={setprice} setratings={setratings} setcategory={setcategory}/>

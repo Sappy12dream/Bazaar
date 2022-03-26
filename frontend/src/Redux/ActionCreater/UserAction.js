@@ -28,7 +28,6 @@ import axios from "axios";
 
 export const userlogin = (Email, Password) => async (dispatch) => {
   try {
-    console.log(Email, Password);
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
@@ -38,7 +37,6 @@ export const userlogin = (Email, Password) => async (dispatch) => {
       { email: Email, password: Password },
       config
     );
-    console.log(Email, Password);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -97,7 +95,6 @@ export const userRegister = (userData) => async (dispatch) => {
       userData,
       config
     );
-    console.log(userData);
 
     dispatch({
       type: USER_REGISTER_SUCCESS,

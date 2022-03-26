@@ -3,7 +3,6 @@ import { ARTIST_FORGOT_PASSWORD_FAIL, ARTIST_FORGOT_PASSWORD_REQUEST, ARTIST_FOR
 
 export const artistlogin = (Email, Password) => async (dispatch) => {
     try {
-      console.log(Email, Password);
       dispatch({
         type: ARTIST_LOGIN_REQUEST,
       });
@@ -13,7 +12,6 @@ export const artistlogin = (Email, Password) => async (dispatch) => {
         { email: Email, password: Password },
         config
       );
-      console.log(Email, Password);
   
       dispatch({
         type: ARTIST_LOGIN_SUCCESS,
@@ -33,7 +31,6 @@ export const artistlogin = (Email, Password) => async (dispatch) => {
         type: LOAD_ARTIST_REQUEST,
       });
       const { data } = await axios.get(`/api/v1/artist/me`);
-  console.log(data.user)
       dispatch({
         type: LOAD_ARTIST_SUCCESS,
         payload: data,
@@ -57,8 +54,6 @@ export const artistlogin = (Email, Password) => async (dispatch) => {
         userData,
         config
       );
-      console.log(data.user.role);
-      console.log(userData);
   
       dispatch({
         type: ARTIST_REGISTER_SUCCESS,
