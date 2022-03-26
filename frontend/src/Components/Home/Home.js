@@ -26,7 +26,7 @@ const Home = () => {
     <div className='Home'>
        <Header/>
        <Routes>
-       <Route path="/" element={<Main/>} />
+       <Route path="/home" element={<Main/>} />
        <Route path="/products/:keyword" element={<Main/>} />
        <Route path="/product/:id" element={<ProductDetails/>} />
 
