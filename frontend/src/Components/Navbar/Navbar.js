@@ -60,7 +60,7 @@ console.log(role);
         )}
 
         
-        {role==="user" &&(<NavLink to="/login/artist" activeClassName="active">
+        {role!=="artist" &&(<NavLink to="/login/artist" activeClassName="active">
             <FaUserLock />
             <span>Artist</span> 
           </NavLink>)}
@@ -89,7 +89,7 @@ console.log(role);
           <span>Logout</span>
         </button>
       )}
-      {role === "artist" && (
+      {role === "artist" || role==="admin" && (
         <button className="btn"onClick={logOutArtist}>
           <RiLogoutBoxRLine />
           <span>Logout Artist</span>

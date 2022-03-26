@@ -14,7 +14,7 @@ exports.createArtist = AsyncErrorHandler(async (req, res, next) => {
     crop: "scale",
   });
   const { name, email, password, whatsappLink,secretKey } = req.body;
-if(secretKey !== "chaycjwsvxbuoadhvncoifdhoi"){
+if(secretKey !== process.env.SECRET_KEY){
 return next(new ErrorHandler("secret key is invalid, contact Admin for more information"),404)
 }
   const user = await Artist.create({
