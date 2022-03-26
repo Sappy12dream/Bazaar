@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 app.use(express.json({ limit: "50mb" }));
 app.use(fileUpload({
     limits: {
-        fileSize: 80000000 //80mb
+        fileSize: 80000000 //80mbb
     },
     abortOnLimit: true
  }));
