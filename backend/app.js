@@ -33,9 +33,13 @@ app.use("/api/v1/artist", artist);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/user", user);
 app.use("/api/v1/wishlist", wishList);
-app.use(errorMiddleware);
+
 app.use(express.static(path.join(__dirname, "../frontend/build")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
+app.use(errorMiddleware);
+
+
 module.exports = app;
