@@ -1,7 +1,7 @@
 const AsyncErrorHandler = require("../Middleware/AsyncErrorHandler");
 const Product = require("../Model/ProductModel");
 const ApiFeatures = require("../utils/apiFeatures");
-const ErrorHandler = require("../Utils/errorHandler");
+const ErrorHandler = require("../utils/errorHandler");
 const cloudinary = require("cloudinary");
 
 //get all products - user

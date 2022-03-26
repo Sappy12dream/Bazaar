@@ -1,7 +1,7 @@
 const Wishlist = require("../Model/WishListModel");
 const AsyncErrorHandler = require("../Middleware/AsyncErrorHandler");
 const Product = require("../Model/ProductModel");
-const ErrorHandler = require("../Utils/errorHandler");
+const ErrorHandler = require("../utils/errorHandler");
 
 exports.addToWishList = AsyncErrorHandler(async (req, res, next) => {
   const items = await Wishlist.find({user:req.user._id})
