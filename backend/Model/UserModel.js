@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "./backend/config/.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/.env" });
+}
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");

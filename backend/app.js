@@ -4,7 +4,10 @@ const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./Middleware/error");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-
+const path = require('path');
+if (process.env.NODE_ENV !== "PRODUCTION") {
+    require("dotenv").config({ path: "backend/config/.env" });
+  }
 app.use(express.json({ limit: "50mb" }));
 app.use(fileUpload({
     limits: {
@@ -29,5 +32,8 @@ app.use("/api/v1/admin", admin);
 app.use("/api/v1/user", user);
 app.use("/api/v1/wishlist", wishList);
 app.use(errorMiddleware);
-
+app.use(express.static(path.join(__dirname,"../frontend/build")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
+})
 module.exports = app;

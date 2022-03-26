@@ -89,7 +89,7 @@ console.log(role);
           <span>Logout</span>
         </button>
       )}
-      {role === "artist" || role==="admin" && (
+      {role === "artist" || role==="admin" (
         <button className="btn"onClick={logOutArtist}>
           <RiLogoutBoxRLine />
           <span>Logout Artist</span>

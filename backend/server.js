@@ -6,7 +6,9 @@ process.on("uncaughtException", (err) => {
   console.log("Shuting down the server");
   process.exit(1);
 });
-require("dotenv").config({ path: "./backend/config/.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/.env" });
+}
 
 const Port = process.env.PORT;
 

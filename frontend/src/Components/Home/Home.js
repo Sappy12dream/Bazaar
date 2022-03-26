@@ -31,6 +31,7 @@ const Home = () => {
        <Route path="/product/:id" element={<ProductDetails/>} />
 
       <Route path="/login" element={<Login/>} />
+      <Route path='*' element={<div className='invalid'>404<br/>Page not found</div>}/>
       <Route path="/admin/users" element={<Users/>} />
       <Route path="/admin/artists" element={<Artists/>} />
       <Route path="/artist" element={<div>artist</div>} />

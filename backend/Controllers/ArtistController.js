@@ -76,7 +76,9 @@ exports.forgotPassword = AsyncErrorHandler(async (req, res, next) => {
   const resetToken = artist.getResetpassToken();
   await artist.save({ validateBeforeSave: false });
 
-  const resetPassUrl = `${process.env.FRONTEND_URL}/artist/password/reset/${resetToken}`;
+  const resetPassUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/artist/password/reset/${resetToken}`;
 
   const message = `YourReset Password Token is \n\n ${resetPassUrl} \n if not requested please ignore`;
 
