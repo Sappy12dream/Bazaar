@@ -2,6 +2,9 @@
     padding: 10px;
     position: relative;
     position: sticky;
+    .close{
+        display: none;
+    }
     .logo{
         display: flex;
         font-size: 20px;
@@ -30,8 +33,25 @@
             
         }
     }
-}
+    @media only screen and (max-width: 768px) {
+        
+        .close{
+            display: block;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .logo{
+            height: 20px;
+            h1{
+                display: none;
+            }
+        }
 
+
+
+    }
+}
 .logout-btn{
     bottom: 0;
     padding: 10px;

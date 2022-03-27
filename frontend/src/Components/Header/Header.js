@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import {IoCloseSharp} from 'react-icons/io5'
+import {BiMenu} from 'react-icons/bi'
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserProfile from "../userProfile/UserProfile";
 
-function Header() {
+function Header({setmenuActive}) {
   const [Active, setActive] = useState(false)
   const navigate = useNavigate();
 
@@ -15,7 +16,6 @@ function Header() {
     (state) => state.user
   );
 
-console.log()
   const [keyword, setkeyword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,8 +26,11 @@ console.log()
       navigate("/");
     }
   };
+ 
   return (
     <div className="Header">
+       <div className="menu" onClick={()=>setmenuActive(true)}><BiMenu style={{fontSize:"14px"}} /></div>
+      
       <form className="Search_tab">
         <FiSearch />
         <input

@@ -1,13 +1,14 @@
 import "./Global/Styles.scss";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home/Home";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import store from "./Redux/store";
 import { loadUser } from "./Redux/ActionCreater/UserAction";
 import { loadArtist } from "./Redux/ActionCreater/ArtistAction";
 
 
 function App() {
+  const [menuActive, setmenuActive] = useState(true)
   useEffect(() => {
     store.dispatch(loadUser())
 
@@ -17,8 +18,8 @@ function App() {
 
 return (
     <div className="App">
-      <Navbar />
-      <Home /> 
+      <Navbar menuActive={menuActive} setmenuActive={setmenuActive}/>
+      <Home setmenuActive={setmenuActive} /> 
     </div>
   );
 }

@@ -4,6 +4,9 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    .menu{
+        display: none;
+    }
     .Search_tab{
         width: 30%;
         padding: 5px;

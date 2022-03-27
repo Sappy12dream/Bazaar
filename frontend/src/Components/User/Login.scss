@@ -40,6 +40,16 @@
 
     }
   }
+  @media only screen and (max-width: 768px) {
+    position: relative;
+    transform: translate(0);
+    left: 0;
+    top: 0;
+    padding: 10px;
+    form{
+      width: 100%;
+    }
+}
 }
 
 

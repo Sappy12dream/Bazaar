@@ -95,10 +95,12 @@ function SubHeader({ setprice, setratings, setcategory }) {
       {role === "artist" && (
         <Link to='artist/product/create'className="add_btn" >
           <button>
-            <span>
+            
               <MdOutlineAddBox />
-            </span>
+            <span>
             Add Product
+
+            </span>
           </button>
         </Link>
       )}

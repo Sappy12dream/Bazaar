@@ -21,10 +21,10 @@ import Users from '../User/Admin/Users';
 import Artists from '../User/Admin/Artists';
 
 
-const Home = () => {
+const Home = ({setmenuActive}) => {
   return (
     <div className='Home'>
-       <Header/>
+       <Header setmenuActive={setmenuActive}/>
        <Routes>
        <Route path="/" element={<Main/>} />
        <Route path="/products/:keyword" element={<Main/>} />
