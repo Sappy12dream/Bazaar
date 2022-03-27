@@ -8,7 +8,7 @@ import { loadArtist } from "./Redux/ActionCreater/ArtistAction";
 
 
 function App() {
-  const [menuActive, setmenuActive] = useState(true)
+  const [menuActive, setmenuActive] = useState(false)
   useEffect(() => {
     store.dispatch(loadUser())
 
