@@ -1,12 +1,12 @@
 .Product {
   width: 260px;
-  height: 230px;
+  height: 220px;
   background-color: var(--dark-color);
   border-radius: 5px;
   color: var(--text-color);
 
-  &:hover{
-      box-shadow: 5px 10px 8px black;
+  &:hover {
+    box-shadow: 5px 10px 8px black;
   }
   .product_image {
     height: 70%;
@@ -46,7 +46,7 @@
     }
   }
 }
-.flex{
+.flex {
   display: flex;
   font-size: 12px;
 }

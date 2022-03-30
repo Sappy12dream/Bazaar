@@ -12,11 +12,10 @@ exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
     .search()
     .filter()
 
-    .pagination(resultPerPage)
-
+    .pagination(resultPerPage);
 
   const products = await apiFeatures.query;
-  
+
   res
     .status(201)
     .json({ nbHits: products.length, productCount, products, resultPerPage });
@@ -25,16 +24,13 @@ exports.getAllProducts = AsyncErrorHandler(async (req, res, next) => {
 //get all products - admin
 
 exports.getAllArtistProducts = AsyncErrorHandler(async (req, res, next) => {
-  
-  const products = await Product.find({ artist: req.user._id })
-  res
-    .status(201)
-    .json({ nbHits: products.length, products });
+  const products = await Product.find({ artist: req.user._id });
+  res.status(201).json({ nbHits: products.length, products });
 });
 
 //create product - Artist
 exports.createProduct = AsyncErrorHandler(async (req, res, next) => {
-let images = []
+  let images = [];
 
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
@@ -47,7 +43,6 @@ let images = []
   for (let i = 0; i < images.length; i++) {
     const result = await cloudinary.v2.uploader.upload(images[i], {
       folder: "products",
-      
     });
 
     imagesLinks.push({
@@ -55,8 +50,7 @@ let images = []
       url: result.secure_url,
     });
   }
-  
-  
+
   req.body.artist = req.user.id;
   req.body.artistName = req.user.name;
   req.body.whatsappLink = req.user.whatsappLink;
@@ -74,7 +68,7 @@ let images = []
 
 exports.updateProduct = AsyncErrorHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
-  
+
   if (!product) {
     return next(new ErrorHandler("product not found", 404));
   }
@@ -111,7 +105,7 @@ exports.updateProduct = AsyncErrorHandler(async (req, res, next) => {
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body);
   res.status(201).json({
-    success:true
+    success: true,
   });
 });
 
@@ -195,35 +189,5 @@ exports.getAllReviews = AsyncErrorHandler(async (req, res, next) => {
     success: true,
     nbHits: product.numberOfReviews,
     reviews: product.reviews,
-  });
-});
-
-exports.deleteReview = AsyncErrorHandler(async (req, res, next) => {
-  const product = await Product.findById(req.query.productId);
-  if (!product) {
-    return next(new ErrorHandler("product not found", 404));
-  }
-
-  const reviews = product.reviews.filter(
-    (rev) => rev._id.toString() !== req.query.id.toString()
-  );
-
-  let avg = 0;
-
-  reviews.forEach((rev) => {
-    avg += rev.rating;
-  });
-  const ratings = avg / reviews.length;
-  const numberOfReviews = reviews.length;
-
-  await Product.findByIdAndUpdate(req.query.productId, {
-    ratings,
-    reviews,
-    numberOfReviews,
-  });
-
-  res.status(201).json({
-    success: true,
-    message: "Deleted",
   });
 });

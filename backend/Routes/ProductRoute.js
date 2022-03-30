@@ -13,19 +13,21 @@ const {
 } = require("../Controllers/ProductController");
 const { isAuth, authRoles } = require("../Middleware/auth");
 
-router.route("/products").get(getAllProducts)
-router.route("/artist/products").get(isAuth, authRoles("artist") || authRoles('admin'),getAllArtistProducts);
+router.route("/products").get(getAllProducts);
+router
+  .route("/artist/products")
+  .get(isAuth, authRoles("artist"), getAllArtistProducts);
 
 //Artist Route
-router.route("/new/product").post(isAuth, authRoles("artist") || authRoles('admin'), createProduct);
+router.route("/new/product").post(isAuth, authRoles("artist"), createProduct);
 router
   .route("/product/:id")
-  .put(isAuth, authRoles("artist") || authRoles('admin'), updateProduct)
-  .delete(isAuth, authRoles("artist") || authRoles('admin'), deleteProduct)
+  .put(isAuth, authRoles("artist"), updateProduct)
+  .delete(isAuth, authRoles("artist"), deleteProduct)
   .get(getProduct);
 
 router.route("/add/review").put(isAuth, createProdutReview);
 
-router.route("/reviews").get(getAllReviews).delete(isAuth, deleteReview);
+router.route("/reviews").get(getAllReviews);
 
 module.exports = router;

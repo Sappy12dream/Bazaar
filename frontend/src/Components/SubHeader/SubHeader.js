@@ -10,7 +10,7 @@ function SubHeader({ setprice, setratings, setcategory }) {
   const [Activecategory, setActivecategory] = useState(false);
   const [ActiveRating, setActiveRating] = useState(false);
   const priceVal = [5000, 4000, 3000, 1000, 500, 300];
-  
+
   const categoryVal = [
     "Ceramics crafts",
     "glass crafts",
@@ -41,7 +41,7 @@ function SubHeader({ setprice, setratings, setcategory }) {
           {ActivePrice && (
             <div className="list" onClick={() => setActivePrice(!ActivePrice)}>
               {priceVal.map((val) => (
-                <div className="item" onClick={() => setprice(val)}  key={val}>
+                <div className="item" onClick={() => setprice(val)} key={val}>
                   <span>Below</span> {val}
                 </div>
               ))}
@@ -83,24 +83,29 @@ function SubHeader({ setprice, setratings, setcategory }) {
               onClick={() => setActivecategory(!Activecategory)}
             >
               {categoryVal.map((val) => (
-                <div className="item" onClick={() => setcategory(val)}  key={val}>
+                <div
+                  className="item"
+                  onClick={() => setcategory(val)}
+                  key={val}
+                >
                   {val}
                 </div>
               ))}
             </div>
           )}
         </>
-        <div className="category_filter filter" onClick={()=>window.location.reload()}>Reset</div>
+        <div
+          className="category_filter filter"
+          onClick={() => window.location.reload()}
+        >
+          Reset
+        </div>
       </div>
       {role === "artist" && (
-        <Link to='artist/product/create'className="add_btn" >
+        <Link to="artist/product/create" className="add_btn">
           <button>
-            
-              <MdOutlineAddBox />
-            <span>
-            Add Product
-
-            </span>
+            <MdOutlineAddBox />
+            <span>Add Product</span>
           </button>
         </Link>
       )}
