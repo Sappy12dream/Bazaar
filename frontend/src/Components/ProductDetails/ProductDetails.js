@@ -35,6 +35,7 @@ function ProductDetails() {
     (state) => state.newReview
   );
   const { isAuthenticated } = useSelector((state) => state.user);
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -49,7 +50,7 @@ function ProductDetails() {
       dispatch(clearErrs());
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert, err, reviewError]);
+  }, [dispatch, id, error, alert, err, reviewError, isAuthenticated]);
 
   const handleSubmit = (e) => {
     navigate("/login?redirect=/");
@@ -64,21 +65,25 @@ function ProductDetails() {
   };
 
   const revSubmit = () => {
-    let productId = product._id;
+    if (isAuthenticated) {
+      let productId = product._id;
 
-    const myForm = new FormData();
+      const myForm = new FormData();
 
-    myForm.set("rating", rating);
-    myForm.set("comment", comment);
-    myForm.set("productId", productId);
+      myForm.set("rating", rating);
+      myForm.set("comment", comment);
+      myForm.set("productId", productId);
 
-    dispatch(newReview(myForm));
+      dispatch(newReview(myForm));
 
-    setActive(false);
-    if (reviewSuccess) {
-      alert.success("Review Added Successfully");
+      setActive(false);
+      if (reviewSuccess) {
+        alert.success("Review Added Successfully");
+      }
+      window.location.reload();
+    } else {
+      navigate("/login");
     }
-    window.location.reload();
   };
 
   const style = { color: "white", fontSize: "20px" };
@@ -182,10 +187,13 @@ function ProductDetails() {
                       type="text"
                       placeholder="comment.."
                       onChange={(e) => setComment(e.target.value)}
+                      required
                     />
                     <div>
                       <button onClick={() => setActive(false)}>Cancel</button>
-                      <button onClick={revSubmit}>Submit</button>
+                      <button onClick={revSubmit} type="submit">
+                        Submit
+                      </button>
                     </div>
                   </div>
                 ) : (

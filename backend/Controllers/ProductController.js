@@ -141,6 +141,9 @@ exports.getProduct = AsyncErrorHandler(async (req, res, next) => {
 
 exports.createProdutReview = AsyncErrorHandler(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
+  if (comment === "") {
+    return next(new ErrorHandler("Comment & ratings is required", 404));
+  }
   const review = {
     user: req.user._id,
     name: req.user.name,
