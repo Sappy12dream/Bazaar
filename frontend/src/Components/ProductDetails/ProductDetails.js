@@ -21,8 +21,8 @@ import { Rating } from "@mui/material";
 
 function ProductDetails() {
   const [rating, setrating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [Active, setActive] = useState(false)
+  const [comment, setComment] = useState("");
+  const [Active, setActive] = useState(false);
   const navigate = useNavigate();
   const alert = useAlert();
   const { id } = useParams();
@@ -30,10 +30,11 @@ function ProductDetails() {
   const { loading, product, error } = useSelector(
     (state) => state.productDetails
   );
-  const { loadng, success, err} = useSelector((state) => state.addwishList);
-  const { success:reviewSuccess, error: reviewError } = useSelector(
+  const { loadng, success, err } = useSelector((state) => state.addwishList);
+  const { success: reviewSuccess, error: reviewError } = useSelector(
     (state) => state.newReview
   );
+  const { isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -48,7 +49,7 @@ function ProductDetails() {
       dispatch(clearErrs());
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert, err,reviewError]);
+  }, [dispatch, id, error, alert, err, reviewError]);
 
   const handleSubmit = (e) => {
     navigate("/login?redirect=/");
@@ -58,10 +59,8 @@ function ProductDetails() {
       dispatch(addItem(productId));
       if (success) {
         alert.success("Item added to WishList Successfully!");
-        
       }
     }
-
   };
 
   const revSubmit = () => {
@@ -76,10 +75,10 @@ function ProductDetails() {
     dispatch(newReview(myForm));
 
     setActive(false);
-    if(reviewSuccess){
-      alert.success("Review Added Successfully")
+    if (reviewSuccess) {
+      alert.success("Review Added Successfully");
     }
-    window.location.reload()
+    window.location.reload();
   };
 
   const style = { color: "white", fontSize: "20px" };
@@ -136,9 +135,21 @@ function ProductDetails() {
                   <span>{product.price} RS</span>
                 </div>
                 <div className="action">
-                  <a href={product.whatsappLink} target="_blank" rel="noopener noreferrer">
-                    <IoLogoWhatsapp style={{ color: "green" }} />
-                  </a>
+                  {!isAuthenticated ? (
+                    <Link to="/login">
+                      <IoLogoWhatsapp style={{ color: "green" }} />
+                    </Link>
+                  ) : (
+                    <a
+                      href={product.whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      disabled
+                    >
+                      <IoLogoWhatsapp style={{ color: "green" }} />
+                    </a>
+                  )}
+
                   <RiHeartAddFill
                     onClick={handleSubmit}
                     style={{
@@ -148,35 +159,38 @@ function ProductDetails() {
                       color: "red",
                     }}
                   />
-                  <BiCommentAdd 
-                  onClick={()=>setActive(true)}
+                  <BiCommentAdd
+                    onClick={() => setActive(true)}
                     style={{
                       cursor: "pointer",
                       marginLeft: "10px",
                       marginRight: "10px",
                       color: "Orange",
-
-                    }
-                  }
+                    }}
                   />
                 </div>
-                {
-                  Active?(<div className="rev-form">
-                  <h4>Add Review!</h4>
-                  <Rating
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={(e) => setrating(e.target.value)}
-                    precision={0.5}
-                  />
-                  <input type="text" placeholder="comment.."  onChange={(e)=>setComment(e.target.value)}/>
-                  <div>
-                    <button onClick={()=> setActive(false)}>Cancel</button>
-                    <button onClick={revSubmit}>Submit</button>
+                {Active ? (
+                  <div className="rev-form">
+                    <h4>Add Review!</h4>
+                    <Rating
+                      name="simple-controlled"
+                      value={rating}
+                      onChange={(e) => setrating(e.target.value)}
+                      precision={0.5}
+                    />
+                    <input
+                      type="text"
+                      placeholder="comment.."
+                      onChange={(e) => setComment(e.target.value)}
+                    />
+                    <div>
+                      <button onClick={() => setActive(false)}>Cancel</button>
+                      <button onClick={revSubmit}>Submit</button>
+                    </div>
                   </div>
-                </div>):(<></>)
-                }
-                
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <h3>Reviews</h3>
