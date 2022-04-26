@@ -5,7 +5,7 @@ import { MdFavorite } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdShoppingBasket } from "react-icons/md";
 import { logoutUser } from "../../Redux/ActionCreater/UserAction";
 import { useNavigate } from "react-router-dom";
 import { IoColorPaletteOutline } from "react-icons/io5";
@@ -47,8 +47,8 @@ function Navbar({ menuActive, setmenuActive }) {
         <MdClose />
       </div>
       <div className="logo">
-        <FaOpencart />
-        <h1>Bazaar</h1>
+        <FaOpencart style={{ fontSize: "20px" }} />
+        <h1>AS|MART</h1>
       </div>
       <div className="menu">
         <NavLink
@@ -67,6 +67,16 @@ function Navbar({ menuActive, setmenuActive }) {
           >
             <MdFavorite />
             <span>Wish-List</span>
+          </NavLink>
+        )}
+        {isAuthenticated && (
+          <NavLink
+            to="/orders"
+            activeClassName="active"
+            onClick={() => setmenuActive(false)}
+          >
+            <MdShoppingBasket />
+            <span>My Orders</span>
           </NavLink>
         )}
 
@@ -99,6 +109,16 @@ function Navbar({ menuActive, setmenuActive }) {
           >
             <FaUserLock />
             <span>Users</span>
+          </NavLink>
+        )}
+        {role === "admin" && (
+          <NavLink
+            to="/admin/order"
+            activeClassName="active"
+            onClick={() => setmenuActive(false)}
+          >
+            <FaUserLock />
+            <span>Orders</span>
           </NavLink>
         )}
         {role === "admin" && (

@@ -1,0 +1,340 @@
+.cartPage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .cartContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+}
+.cartHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.CartItemCard {
+  width: 200px;
+  height: 80px;
+
+  display: flex;
+  font-size: 12px;
+  img {
+    width: 40%;
+    height: 100%;
+    margin-right: 10px;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    justify-content: center;
+  }
+}
+
+.cartInput {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .number {
+    width: 50px;
+  }
+}
+
+.cartSubtotal {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.shippingContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main);
+  color: var(--text-color);
+  .shippingHeading {
+    margin-bottom: 10px;
+  }
+  .shippingBox {
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    .shippingForm {
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+          width: 100%;
+          padding: 5px;
+          margin: 10px 0;
+          background-color: var(--color);
+          color: var(--text-color);
+          outline: none;
+          border: 1px solid gray;
+          border-radius: 5px;
+          margin-left: 10px;
+        }
+        select {
+          width: 100%;
+          border: 1px solid gray;
+          border-radius: 5px;
+          outline: none;
+          color: var(--text-color);
+          background-color: var(--color);
+          margin-bottom: 10px;
+          margin-left: 10px;
+        }
+      }
+      .shippingBtn {
+        cursor: pointer;
+        background-color: crimson;
+        border: none;
+        outline: none;
+        color: white;
+        width: 100%;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+.cartGrossProfit {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid gray;
+
+  button {
+    background-color: crimson;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.confirmOrderPage {
+  font-size: 12px;
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  button {
+    width: 100%;
+  }
+  div {
+    .confirmshippingArea {
+      font-size: 12px;
+
+      background-color: var(--dark-color);
+
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .confirmshippingAreaBox {
+        padding: 10px;
+        div {
+          display: flex;
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+.confirmCartItems {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--dark-color);
+  border-radius: 5px;
+}
+.confirmCartItemsContainer {
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+.orderSummary {
+  border-radius: 5px;
+
+  font-size: 12px;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--dark-color);
+  .info {
+    margin: 10px 0;
+    div {
+      display: flex;
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+  .orderSummaryTotal {
+    display: flex;
+    span {
+      margin-left: 10px;
+    }
+  }
+}
+.teal:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.button {
+  background-color: crimson;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.teal {
+  background-color: teal;
+}
+
+.myOrdersPage {
+  background-color: var(--light-color);
+}
+.myOrdersTable {
+  color: var(--text-color);
+}
+
+.orderDetailsPage {
+  width: 100%;
+  height: 100%;
+  background-color: var(--light-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+
+  .orderDetailsContainer {
+    margin-top: 10px;
+
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .orderDetailsContainerBox {
+      div {
+        display: flex;
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .orderDetailsCartItems {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 10px;
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}
+
+.greenColor {
+  color: green;
+  margin-left: 10px;
+}
+.redColor {
+  color: red;
+  margin-left: 10px;
+}
+
+.productListTable {
+  color: var(--text-color);
+}
+.dashboard {
+  background-color: var(--light-color);
+  width: 100%;
+  height: 100%;
+}
+
+#createProductBtn {
+  background-color: crimson;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.flex {
+  display: flex;
+  span {
+    margin-left: 10px;
+  }
+}

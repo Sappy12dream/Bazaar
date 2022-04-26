@@ -1,16 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
-@import '../Components/Navbar/Navbar.scss';
-@import '../Components/Header/Header.scss';
-@import '../Components/SubHeader/SubHeader.scss';
-@import '../Components/ProductScreen/ProductScreen.scss';
-@import '../Components/Product/Product.scss';
-@import '../Components/ProductDetails/ProductDetails.scss';
-@import '../Components/ProductDetails/Review/Review.scss';
-@import '../Components/User/Login.scss';
-@import '../Components/User/Register.scss';
-@import '../Components/userProfile/UserProfile.scss';
-@import '../Components/WishList/WishList.scss';
-@import '../Components/User/Admin/List.scss';
+@import "../Components/Navbar/Navbar.scss";
+@import "../Components/Header/Header.scss";
+@import "../Components/SubHeader/SubHeader.scss";
+@import "../Components/ProductScreen/ProductScreen.scss";
+@import "../Components/Product/Product.scss";
+@import "../Components/ProductDetails/ProductDetails.scss";
+@import "../Components/ProductDetails/Review/Review.scss";
+@import "../Components/User/Login.scss";
+@import "../Components/User/Register.scss";
+@import "../Components/userProfile/UserProfile.scss";
+@import "../Components/WishList/WishList.scss";
+@import "../Components/User/Admin/List.scss";
+@import "../Components/Cart/Cart.scss";
 
 * {
   margin: 0;
@@ -26,15 +27,14 @@
   $dark-color: #050505;
   $color: #383838;
   $light-color: #6a6767;
-  $lightest-blue:#e9eef7;
-  $color-blue:#dee8fa;
-$main:#171917;
-$light:#f0f4fc;
-$drk-hrey:#d8dde8;
-$drk:#d5e0f7;
-
+  $lightest-blue: #e9eef7;
+  $color-blue: #dee8fa;
+  $main: #171917;
+  $light: #f0f4fc;
+  $drk-hrey: #d8dde8;
+  $drk: #d5e0f7;
 }
-  
+
 $dark_black: #050505;
 $black: #171917;
 $light_color: #050505;
@@ -49,45 +49,41 @@ $grey: #6a6767;
   color: var(--text-color);
   display: flex;
   position: relative;
-  .Home
-  {
+  .Home {
     background-color: var(--background-color);
-    width:86%;
-    height:100%;
-    .Header{
+    width: 86%;
+    height: 100%;
+    .Header {
       width: 100%;
       height: 10%;
       background-color: var(--dark-color);
     }
-    .Main{
+    .Main {
       width: 100%;
       height: 90%;
       background-color: var(--main);
       padding: 8px;
-      .Sub_header{
+      .Sub_header {
         width: 100%;
         height: 9%;
         margin: 0px 0;
         background-color: var(--color);
-
       }
-      .Product_screen{
+      .Product_screen {
         width: 100%;
-      height: 89%;
-      margin-top: 5px;
+        height: 89%;
+        margin-top: 5px;
         background-color: var(--color);
       }
     }
-    
   }
-  .Navbar{
+  .Navbar {
     background-color: var(--dark-color);
-    width:14%;
+    width: 14%;
   }
-
 }
 
-.invalid{
+.invalid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,121 +91,114 @@ $grey: #6a6767;
   text-align: center;
 }
 
-
 @media only screen and (max-width: 768px) {
-   
-
-
-  .App{
+  .App {
     width: 100%;
     height: 100%;
     display: block;
-    .Home{
+    overflow-x: visible;
+    overflow-y: visible;
+
+    .Home {
       width: 100%;
       height: 100%;
-      .Header{
+      .Header {
         width: 100%;
         height: 40px;
         padding: 5px;
-        .user_profile{
+        .user_profile {
           font-size: 12px;
-          .user_pic{
+          .user_pic {
             width: 20px;
             height: 20px;
           }
         }
-        .menu{
+        .menu {
           display: block;
         }
-        .Search_tab{
+        .Search_tab {
           width: 200px;
           padding: 2px;
-          button{
+          button {
             padding: 2px;
             font-size: 12px;
           }
         }
-        .login-btn{
+        .login-btn {
           padding: 5px 5px;
           font-size: 12px;
           line-height: 12px;
         }
       }
-      .Main{
+      .Main {
         width: 100%;
         height: 100%;
-        .Sub_header{
+        .Sub_header {
           height: 40px;
           padding: 5px;
-          .options{
-            gap:5px;
+          .options {
+            gap: 5px;
           }
-          .add_btn{
-            button{
+          .add_btn {
+            button {
               line-height: 14px;
               font-size: 20px;
               padding: 4px;
-              span{
+              span {
                 display: none;
-
               }
             }
           }
         }
       }
     }
-    .Navbar{
+    .Navbar {
       overflow: hidden;
       position: fixed;
       width: 100%;
       height: 100vh;
-      top:0;
+      top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       z-index: 10;
     }
-.menuu{display: none;}
-   
+    .menuu {
+      display: none;
+    }
   }
- 
- 
- .user-profile{
-   top:80%;
-   z-index: 5;
-   padding: 5px;
-   font-size: 12px;
-   .header{
-     div{
-       gap: 5px;
-      img{
-        height: 30px;
-        height: 30px;
+
+  .user-profile {
+    top: 80%;
+    z-index: 5;
+    padding: 5px;
+    font-size: 12px;
+    .header {
+      div {
+        gap: 5px;
+        img {
+          height: 30px;
+          height: 30px;
+        }
       }
-     }
-   
-   }
-  
- }
+    }
+  }
 
- .Product_screen{
-   padding: 10px;
-   gap: 5px;
-   .products-wrapper{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-   
-   }
-   
- }
- .Product{
-  width: 320px;
-  padding: 5px;
-}
-
+  .Product_screen {
+    padding: 10px;
+    gap: 5px;
+    .products-wrapper {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+    }
+  }
+  .Product {
+    width: 320px;
+    padding: 5px;
+  }
 }
 element.style {
   height: 200px;

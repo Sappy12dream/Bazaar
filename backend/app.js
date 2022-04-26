@@ -18,7 +18,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
@@ -27,18 +26,18 @@ const artist = require("./Routes/ArtistRoute");
 const admin = require("./Routes/AdminRoutes");
 const user = require("./Routes/UserRoute");
 const wishList = require("./Routes/WishListRoute");
-
+const order = require("./Routes/OrderRoutes");
 app.use("/api/v1", product);
 app.use("/api/v1/artist", artist);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/user", user);
 app.use("/api/v1/wishlist", wishList);
+app.use("/api/v1/order", order);
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
-
 app.use(errorMiddleware);
 
 module.exports = app;

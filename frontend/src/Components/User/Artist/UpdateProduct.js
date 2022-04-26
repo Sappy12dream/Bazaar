@@ -21,7 +21,6 @@ function UpdateProduct() {
     loading,
     error: updateError,
     isUpdated,
-    
   } = useSelector((state) => state.product);
 
   const [name, setName] = useState("");
@@ -122,8 +121,8 @@ function UpdateProduct() {
   };
   return (
     <div className=" Register Login">
-      <h3>Create Product!</h3>
-      <p>Fill up the form to create</p>
+      <h3>Update Product!</h3>
+      <p>Fill up the form to Update Product</p>
       <form encType="multipart/form-data" onSubmit={updateProductSubmitHandler}>
         <input
           type="text"

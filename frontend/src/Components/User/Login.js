@@ -4,18 +4,19 @@ import { ThreeDots } from "react-loader-spinner";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { clearErrors, userlogin } from "../../Redux/ActionCreater/UserAction";
 
 function Login() {
   const alert = useAlert();
   const navigate = useNavigate();
-
   const [Email, setEmail] = useState(" ");
   const [Password, setPassword] = useState(" ");
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
+  const { history } = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
@@ -23,28 +24,28 @@ function Login() {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      navigate("/wishlist");
+      navigate("/");
     }
-  }, [dispatch, error, alert, isAuthenticated, navigate]);
+  }, [dispatch, error, alert, isAuthenticated, navigate, history]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(userlogin(Email, Password));
-    console.log(Email, Password);
-    console.log("loggin");
   };
 
   return (
     <>
       {loading ? (
-        <><div className="loader">
-        <ThreeDots
-          type="Spinner Type"
-          color="crimson"
-          height={80}
-          width={80}
-        />
-      </div></>
+        <>
+          <div className="loader">
+            <ThreeDots
+              type="Spinner Type"
+              color="crimson"
+              height={80}
+              width={80}
+            />
+          </div>
+        </>
       ) : (
         <div className="Login">
           <h3>Welcome Back!</h3>

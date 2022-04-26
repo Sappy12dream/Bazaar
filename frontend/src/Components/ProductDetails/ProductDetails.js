@@ -17,7 +17,9 @@ import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { addItem, clearErrs } from "../../Redux/ActionCreater/WishListAction";
 import { BiCommentAdd } from "react-icons/bi";
+import { FaCartPlus } from "react-icons/fa";
 import { Rating } from "@mui/material";
+import { addItemsToCart } from "../../Redux/ActionCreater/CartAction";
 
 function ProductDetails() {
   const [rating, setrating] = useState(0);
@@ -61,6 +63,15 @@ function ProductDetails() {
       if (success) {
         alert.success("Item added to WishList Successfully!");
       }
+    }
+  };
+
+  const addToCartHandler = () => {
+    if (isAuthenticated) {
+      dispatch(addItemsToCart(id, 1));
+      alert.success("Item Added To Cart");
+    } else {
+      navigate("/login");
     }
   };
 
@@ -171,6 +182,14 @@ function ProductDetails() {
                       marginLeft: "10px",
                       marginRight: "10px",
                       color: "Orange",
+                    }}
+                  />
+                  <FaCartPlus
+                    onClick={addToCartHandler}
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                      marginRight: "10px",
                     }}
                   />
                 </div>
