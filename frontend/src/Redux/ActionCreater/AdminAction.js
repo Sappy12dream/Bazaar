@@ -48,7 +48,7 @@ export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_USER_LIST_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1//admin/user/${id}`);
+    const { data } = await axios.delete(`/api/v1/admin/user/${id}`);
 
     dispatch({ type: DELETE_USER_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -62,7 +62,7 @@ export const deleteArtist = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ARTIST_LIST_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1//admin/artist/${id}`);
+    const { data } = await axios.delete(`/api/v1/admin/artist/${id}`);
 
     dispatch({ type: DELETE_ARTIST_LIST_SUCCESS, payload: data });
   } catch (error) {
